@@ -1,0 +1,40 @@
+{
+    "service_name": "efs",
+    "functions": [
+        {
+            "function_name": "describe_file_systems",
+            "function_description": "Returns the description of a specific Amazon EFS file system ",
+            "boto_session_type": "client",
+            "response_format": "FORMAT_2",
+            "function_type": "list",
+            "is_regional": "Yes",
+            "pagination_support": "Yes",
+            "result_keys": [
+                "FileSystems"
+            ],
+            "json_response": {
+                "OwnerId": "string",
+                "CreationToken": "string",
+                "FileSystemId": "string",
+                "FileSystemArn": "string",
+                "CreationTime": "",
+                "LifeCycleState": "",
+                "Name": "string",
+                "NumberOfMountTargets": "",
+                "SizeInBytes_Value": "",
+                "SizeInBytes_Timestamp": "",
+                "SizeInBytes_ValueInIA": "",
+                "SizeInBytes_ValueInStandard": "",
+                "PerformanceMode": "",
+                "Encrypted": "",
+                "KmsKeyId": "string",
+                "ThroughputMode": "",
+                "ProvisionedThroughputInMibps": "",
+                "AvailabilityZoneName": "string",
+                "AvailabilityZoneId": "string",
+                "Tags_0_Key": "string",
+                "Tags_0_Value": "string"
+            }
+        }
+    ]
+}

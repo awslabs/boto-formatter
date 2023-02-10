@@ -1,0 +1,4 @@
+include boto_formatter/service_config_mgr/service_configs/*.json
+recursive-include boto_formatter *.json
+global-include *.json
+global-exclude *.pyc

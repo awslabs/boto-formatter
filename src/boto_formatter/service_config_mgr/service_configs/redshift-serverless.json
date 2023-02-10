@@ -1,0 +1,66 @@
+{
+    "service_name": "redshift-serverless",
+    "functions": [
+        {
+            "function_name": "list_namespaces",
+            "function_description": "List Name spaces",
+            "boto_session_type": "client",
+            "response_format": "FORMAT_2",
+            "function_type": "list",
+            "is_regional": "Yes",
+            "pagination_support": "Yes",
+            "result_keys": [
+                "namespaces"
+            ],
+            "json_response": {
+                "adminUsername": "string",
+                "creationDate": "string",
+                "dbName": "string",
+                "defaultIamRoleArn": "string",
+                "iamRoles_0": "string",
+                "kmsKeyId": "string",
+                "logExports_0": "",
+                "namespaceArn": "string",
+                "namespaceId": "string",
+                "namespaceName": "string",
+                "status": ""
+            }
+        },
+        {
+            "function_name": "list_workgroups",
+            "function_description": "List work groups",
+            "boto_session_type": "client",
+            "response_format": "FORMAT_2",
+            "function_type": "list",
+            "is_regional": "Yes",
+            "pagination_support": "Yes",
+            "result_keys": [
+                "workgroups"
+            ],
+            "json_response": {
+                "baseCapacity": "",
+                "configParameters_0_parameterKey": "string",
+                "configParameters_0_parameterValue": "string",
+                "creationDate": "string",
+                "endpoint_address": "string",
+                "endpoint_port": "",
+                "endpoint_vpcEndpoints_0_networkInterfaces_0_availabilityZone": "string",
+                "endpoint_vpcEndpoints_0_networkInterfaces_0_networkInterfaceId": "string",
+                "endpoint_vpcEndpoints_0_networkInterfaces_0_privateIpAddress": "string",
+                "endpoint_vpcEndpoints_0_networkInterfaces_0_subnetId": "string",
+                "endpoint_vpcEndpoints_0_vpcEndpointId": "string",
+                "endpoint_vpcEndpoints_0_vpcId": "string",
+                "enhancedVpcRouting": "string",
+                "namespaceName": "string",
+                "port": "",
+                "publiclyAccessible": "string",
+                "securityGroupIds_0": "string",
+                "status": "",
+                "subnetIds_0": "string",
+                "workgroupArn": "string",
+                "workgroupId": "string",
+                "workgroupName": "string"
+            }
+        }
+    ]
+}

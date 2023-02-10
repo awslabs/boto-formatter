@@ -1,0 +1,39 @@
+{
+    "service_name": "sns",
+    "functions": [
+        {
+            "function_name": "list_subscriptions",
+            "function_description": "List subscriptions",
+            "boto_session_type": "client",
+            "response_format": "FORMAT_2",
+            "function_type": "list",
+            "is_regional": "Yes",
+            "pagination_support": "Yes",
+            "result_keys": [
+                "Subscriptions"
+            ],
+            "json_response": {
+                "SubscriptionArn": "string",
+                "Owner": "string",
+                "Protocol": "string",
+                "Endpoint": "string",
+                "TopicArn": "string"
+            }
+        },
+        {
+            "function_name": "list_topics",
+            "function_description": "Returns a list of topics",
+            "boto_session_type": "client",
+            "response_format": "FORMAT_2",
+            "function_type": "list",
+            "is_regional": "Yes",
+            "pagination_support": "Yes",
+            "result_keys": [
+                "Topics"
+            ],
+            "json_response": {
+                "TopicArn": "string"
+            }
+        }
+    ]
+}

@@ -1,0 +1,21 @@
+{
+    "service_name": "codecommit",
+    "functions": [
+        {
+            "function_name": "list_repositories",
+            "function_description": "Gets information about one or more repositories.",
+            "boto_session_type": "client",
+            "response_format": "FORMAT_2",
+            "function_type": "list",
+            "is_regional": "Yes",
+            "pagination_support": "Yes",
+            "result_keys": [
+                "repositories"
+            ],
+            "json_response": {
+                "repositoryName": "string",
+                "repositoryId": "string"
+            }
+        }
+    ]
+}

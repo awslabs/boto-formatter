@@ -1,0 +1,77 @@
+{
+    "service_name": "s3",
+    "functions": [
+        {
+            "function_name": "create_bucket",
+            "function_description": "create bucket",
+            "boto_session_type": "client",
+            "response_format": "FORMAT_1",
+            "function_type": "create",
+            "is_regional": "No",
+            "pagination_support": "No",
+            "json_response": {
+                "Location": "string"
+            }
+        },
+        {
+            "function_name": "list_buckets",
+            "function_description": "list buckets",
+            "boto_session_type": "client",
+            "response_format": "FORMAT_2",
+            "function_type": "list",
+            "is_regional": "Yes",
+            "pagination_support": "No",
+            "result_keys": [
+                "Buckets"
+            ],
+            "json_response": {
+                "Name": "required",
+                "CreationDate": "required"
+            }
+        },
+        {
+            "function_name": "list_multipart_uploads",
+            "function_description": "list buckets",
+            "boto_session_type": "client",
+            "response_format": "FORMAT_2",
+            "function_type": "list",
+            "is_regional": "No",
+            "pagination_support": "No",
+            "result_keys": [
+                "Uploads"
+            ],
+            "json_response": {
+                "Key": "required",
+                "LastModified": "required",
+                "ETag": "string",
+                "ChecksumAlgorithm_0": "string",
+                "Size": "123",
+                "StorageClass": "required",
+                "Owner_DisplayName": "string",
+                "Owner_ID": "string"
+            }
+        },
+        {
+            "function_name": "list_objects_v2",
+            "function_description": "List Objects",
+            "boto_session_type": "client",
+            "response_format": "FORMAT_2",
+            "function_type": "list",
+            "is_regional": "No",
+            "pagination_support": "Yes",
+            "result_keys": [
+                "Contents"
+            ],
+            "json_response": {
+                "Key": "string",
+                "LastModified": "",
+                "ETag": "string",
+                "ChecksumAlgorithm_0": "",
+                "Size": "",
+                "StorageClass": "",
+                "Owner_DisplayName": "string",
+                "Owner_ID": "string"
+            }
+        }
+    ]
+}

@@ -1,0 +1,79 @@
+{
+    "service_name": "route53",
+    "functions": [
+        {
+            "function_name": "list_cidr_blocks",
+            "function_description": "Returns a paginated list of CIDR collections in the Amazon Web Services account (metadata only)",
+            "boto_session_type": "client",
+            "response_format": "FORMAT_2",
+            "function_type": "list",
+            "is_regional": "No",
+            "pagination_support": "Yes",
+            "result_keys": [
+                "CidrCollections"
+            ],
+            "json_response": {
+                "Arn": "string",
+                "Id": "string",
+                "Name": "string",
+                "Version": ""
+            }
+        },
+        {
+            "function_name": "list_hosted_zones",
+            "function_description": "Retrieves a list of the public and private hosted zones that are associated with the current Amazon Web Services account",
+            "boto_session_type": "client",
+            "response_format": "FORMAT_2",
+            "function_type": "list",
+            "is_regional": "No",
+            "pagination_support": "Yes",
+            "result_keys": [
+                "HostedZones"
+            ],
+            "json_response": {
+                "Id": "string",
+                "Name": "string",
+                "CallerReference": "string",
+                "Config_Comment": "string",
+                "Config_PrivateZone": "",
+                "ResourceRecordSetCount": "",
+                "LinkedService_ServicePrincipal": "string",
+                "LinkedService_Description": "string"
+            }
+        },
+        {
+            "function_name": "list_hosted_zones_by_vpc",
+            "function_description": "Retrieves a list of the public and private hosted zones that are associated with the current Amazon Web Services account",
+            "boto_session_type": "client",
+            "response_format": "FORMAT_2",
+            "function_type": "list",
+            "is_regional": "No",
+            "pagination_support": "Yes",
+            "result_keys": [
+                "HostedZoneSummaries"
+            ],
+            "json_response": {
+                "HostedZoneId": "string",
+                "Name": "string",
+                "Owner_OwningAccount": "string",
+                "Owner_OwningService": "string"
+            }
+        },
+        {
+            "function_name": "list_vpc_association_authorizations",
+            "function_description": "Gets a list of the VPCs that were created by other accounts and that can be associated with a specified hosted zone because youve submitted one or more CreateVPCAssociationAuthorization requests.",
+            "boto_session_type": "client",
+            "response_format": "FORMAT_2",
+            "function_type": "list",
+            "is_regional": "No",
+            "pagination_support": "Yes",
+            "result_keys": [
+                "VPCs"
+            ],
+            "json_response": {
+                "VPCRegion": "",
+                "VPCId": "string"
+            }
+        }
+    ]
+}

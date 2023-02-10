@@ -1,0 +1,55 @@
+{
+    "service_name": "emr-serverless",
+    "functions": [
+        {
+            "function_name": "list_applications",
+            "function_description": "Lists applications",
+            "boto_session_type": "client",
+            "response_format": "FORMAT_2",
+            "function_type": "list",
+            "is_regional": "Yes",
+            "pagination_support": "Yes",
+            "result_keys": [
+                "applications"
+            ],
+            "json_response": {
+                "id": "string",
+                "name": "string",
+                "arn": "string",
+                "releaseLabel": "string",
+                "type": "string",
+                "state": "",
+                "stateDetails": "string",
+                "createdAt": "",
+                "updatedAt": "",
+                "architecture": ""
+            }
+        },
+        {
+            "function_name": "list_job_runs",
+            "function_description": "Lists job runs",
+            "boto_session_type": "client",
+            "response_format": "FORMAT_2",
+            "function_type": "list",
+            "is_regional": "Yes",
+            "pagination_support": "Yes",
+            "result_keys": [
+                "jobRuns"
+            ],
+            "json_response": {
+                "applicationId": "string",
+                "id": "string",
+                "name": "string",
+                "arn": "string",
+                "createdBy": "string",
+                "createdAt": "string",
+                "updatedAt": "string",
+                "executionRole": "string",
+                "state": "",
+                "stateDetails": "string",
+                "releaseLabel": "string",
+                "type": "string"
+            }
+        }
+    ]
+}

@@ -1,0 +1,50 @@
+{
+    "service_name": "ecs",
+    "functions": [
+        {
+            "function_name": "list_clusters",
+            "function_description": "List ECS Clusters",
+            "boto_session_type": "client",
+            "response_format": "FORMAT_3",
+            "function_type": "list",
+            "is_regional": "Yes",
+            "pagination_support": "Yes",
+            "result_keys": [
+                "clusterArns"
+            ],
+            "json_response": {
+                "clusterArns": ""
+            }
+        },
+        {
+            "function_name": "list_services",
+            "function_description": "List ECS services",
+            "boto_session_type": "client",
+            "response_format": "FORMAT_3",
+            "function_type": "list",
+            "is_regional": "Yes",
+            "pagination_support": "Yes",
+            "result_keys": [
+                "serviceArns"
+            ],
+            "json_response": {
+                "ServiceArn": ""
+            }
+        },
+        {
+            "function_name": "list_tasks",
+            "function_description": "List Tasks",
+            "boto_session_type": "client",
+            "response_format": "FORMAT_3",
+            "function_type": "list",
+            "is_regional": "Yes",
+            "pagination_support": "Yes",
+            "result_keys": [
+                "taskArns"
+            ],
+            "json_response": {
+                "taskArn": ""
+            }
+        }
+    ]
+}

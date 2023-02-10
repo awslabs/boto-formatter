@@ -1,0 +1,85 @@
+{
+    "service_name": "lambda",
+    "functions": [
+        {
+            "function_name": "list_functions",
+            "function_description": "List Lambda Functions",
+            "boto_session_type": "client",
+            "response_format": "FORMAT_2",
+            "function_type": "list",
+            "is_regional": "Yes",
+            "pagination_support": "Yes",
+            "result_keys": [
+                "Functions"
+            ],
+            "json_response": {
+                "FunctionName": "required",
+                "FunctionArn": "required",
+                "Runtime": "string",
+                "Role": "string",
+                "Handler": "string",
+                "CodeSize": "",
+                "Description": "",
+                "Timeout": "",
+                "MemorySize": "",
+                "LastModified": "",
+                "CodeSha256": "",
+                "Version": "",
+                "VpcConfig_SubnetIds_0": "0",
+                "VpcConfig_SecurityGroupIds_0": "0",
+                "VpcConfig_VpcId": "string",
+                "DeadLetterConfig_TargetArn": "0",
+                "Environment_Variables_string": "0",
+                "Environment_Error_ErrorCode": "",
+                "Environment_Error_Message": "",
+                "KMSKeyArn": "string",
+                "TracingConfig_Mode": "",
+                "MasterArn": "",
+                "RevisionId": "",
+                "Layers_0_Arn": "",
+                "Layers_0_CodeSize": "",
+                "Layers_0_SigningProfileVersionArn": "",
+                "Layers_0_SigningJobArn": "",
+                "State": "string",
+                "StateReason": "string",
+                "StateReasonCode": "",
+                "LastUpdateStatus": "",
+                "LastUpdateStatusReason": "",
+                "LastUpdateStatusReasonCode": "",
+                "FileSystemConfigs_0_Arn": "string",
+                "FileSystemConfigs_0_LocalMountPath": "string",
+                "PackageType": "",
+                "ImageConfigResponse_ImageConfig_EntryPoint_0": "string",
+                "ImageConfigResponse_ImageConfig_Command_0": "string",
+                "ImageConfigResponse_ImageConfig_WorkingDirectory": "string",
+                "ImageConfigResponse_Error_ErrorCode": "string",
+                "ImageConfigResponse_Error_Message": "string",
+                "SigningProfileVersionArn": "string",
+                "SigningJobArn": "string",
+                "Architectures_0": "",
+                "EphemeralStorage_Size": ""
+            }
+        },
+        {
+            "function_name": "list_layers",
+            "function_description": "List Layers",
+            "boto_session_type": "client",
+            "response_format": "FORMAT_2",
+            "function_type": "list",
+            "is_regional": "Yes",
+            "pagination_support": "Yes",
+            "result_keys": [
+                "Layers"
+            ],
+            "json_response": {
+                "LatestMatchingVersion_CompatibleRuntimes_0": "",
+                "LatestMatchingVersion_CreatedDate": "",
+                "LatestMatchingVersion_Description": "",
+                "LatestMatchingVersion_LayerVersionArn": "",
+                "LatestMatchingVersion_Version": "",
+                "LayerArn": "required",
+                "LayerName": "required"
+            }
+        }
+    ]
+}

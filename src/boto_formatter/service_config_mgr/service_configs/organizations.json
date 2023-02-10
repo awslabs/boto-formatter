@@ -1,0 +1,46 @@
+{
+    "service_name": "organizations",
+    "functions": [
+        {
+            "function_name": "list_accounts",
+            "function_description": "List accounts in Organization",
+            "boto_session_type": "client",
+            "response_format": "FORMAT_2",
+            "function_type": "list",
+            "is_regional": "No",
+            "pagination_support": "Yes",
+            "result_keys": [
+                "Accounts"
+            ],
+            "json_response": {
+                "Id": "string",
+                "Arn": "string",
+                "Email": "string",
+                "Name": "string",
+                "Status": "",
+                "JoinedMethod": "",
+                "JoinedTimestamp": ""
+            }
+        },
+        {
+            "function_name": "list_policies",
+            "function_description": "List Policies in  Organization",
+            "boto_session_type": "client",
+            "response_format": "FORMAT_2",
+            "function_type": "list",
+            "is_regional": "No",
+            "pagination_support": "Yes",
+            "result_keys": [
+                "Policies"
+            ],
+            "json_response": {
+                "Id": "string",
+                "Arn": "string",
+                "Name": "string",
+                "Description": "string",
+                "Type": "",
+                "AwsManaged": ""
+            }
+        }
+    ]
+}

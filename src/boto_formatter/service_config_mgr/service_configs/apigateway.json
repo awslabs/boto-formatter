@@ -1,0 +1,33 @@
+{
+    "service_name": "apigateway",
+    "functions": [
+        {
+            "function_name": "get_rest_apis",
+            "function_description": "List All Rest APIs",
+            "boto_session_type": "client",
+            "response_format": "FORMAT_2",
+            "function_type": "list",
+            "is_regional": "Yes",
+            "pagination_support": "Yes",
+            "result_keys": [
+                "items"
+            ],
+            "json_response": {
+                "id": "required",
+                "name": "required",
+                "description": "",
+                "createdDate": "",
+                "version": "",
+                "warnings_0": "",
+                "binaryMediaTypes_0": "",
+                "minimumCompressionSize": "",
+                "apiKeySource": "",
+                "endpointConfiguration_types_0": "",
+                "endpointConfiguration_vpcEndpointIds_0": "",
+                "policy": "",
+                "tags_string": "",
+                "disableExecuteApiEndpoint": ""
+            }
+        }
+    ]
+}

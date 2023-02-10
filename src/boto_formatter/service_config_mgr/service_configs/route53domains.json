@@ -1,0 +1,48 @@
+{
+    "service_name": "route53domains",
+    "functions": [
+        {
+            "function_name": "list_domains",
+            "function_description": "Domain names registered with Amazon Route 53 ",
+            "boto_session_type": "client",
+            "response_format": "FORMAT_2",
+            "function_type": "list",
+            "is_regional": "No",
+            "pagination_support": "Yes",
+            "result_keys": [
+                "Domains"
+            ],
+            "json_response": {
+                "DomainName": "string",
+                "AutoRenew": "string",
+                "TransferLock": "string",
+                "Expiry": "string"
+            }
+        },
+        {
+            "function_name": "list_prices",
+            "function_description": "Lists the following prices for either all the TLDs supported by Route 53",
+            "boto_session_type": "client",
+            "response_format": "FORMAT_2",
+            "function_type": "list",
+            "is_regional": "No",
+            "pagination_support": "Yes",
+            "result_keys": [
+                "Prices"
+            ],
+            "json_response": {
+                "Name": "string",
+                "RegistrationPrice_Price": "",
+                "RegistrationPrice_Currency": "string",
+                "TransferPrice_Price": "",
+                "TransferPrice_Currency": "string",
+                "RenewalPrice_Price": "",
+                "RenewalPrice_Currency": "string",
+                "ChangeOwnershipPrice_Price": "",
+                "ChangeOwnershipPrice_Currency": "string",
+                "RestorationPrice_Price": "",
+                "RestorationPrice_Currency": "string"
+            }
+        }
+    ]
+}

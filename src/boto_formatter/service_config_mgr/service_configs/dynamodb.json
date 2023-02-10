@@ -1,0 +1,20 @@
+{
+    "service_name": "dynamodb",
+    "functions": [
+        {
+            "function_name": "list_tables",
+            "function_description": "Returns a list of tables",
+            "boto_session_type": "client",
+            "response_format": "FORMAT_3",
+            "function_type": "list",
+            "is_regional": "Yes",
+            "pagination_support": "Yes",
+            "result_keys": [
+                "TableNames"
+            ],
+            "json_response": {
+                "TableName": ""
+            }
+        }
+    ]
+}

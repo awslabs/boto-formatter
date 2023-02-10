@@ -1,0 +1,87 @@
+{
+    "service_name": "eks",
+    "functions": [
+        {
+            "function_name": "describe_cluster",
+            "function_description": "List EKS Clusters",
+            "boto_session_type": "client",
+            "response_format": "FORMAT_1",
+            "function_type": "object",
+            "is_regional": "Yes",
+            "pagination_support": "No",
+            "result_keys": [
+                "cluster"
+            ],
+            "json_response": {
+                "name": "string",
+                "arn": "string",
+                "createdAt": "",
+                "version": "string",
+                "endpoint": "string",
+                "roleArn": "string",
+                "resourcesVpcConfig_subnetIds_0": "string",
+                "resourcesVpcConfig_securityGroupIds_0": "string",
+                "resourcesVpcConfig_clusterSecurityGroupId": "string",
+                "resourcesVpcConfig_vpcId": "string",
+                "resourcesVpcConfig_endpointPublicAccess": "",
+                "resourcesVpcConfig_endpointPrivateAccess": "",
+                "resourcesVpcConfig_publicAccessCidrs_0": "string",
+                "kubernetesNetworkConfig_serviceIpv4Cidr": "string",
+                "kubernetesNetworkConfig_serviceIpv6Cidr": "string",
+                "kubernetesNetworkConfig_ipFamily": "",
+                "logging_clusterLogging_0_types_0": "",
+                "logging_clusterLogging_0_enabled": "",
+                "identity_oidc_issuer": "string",
+                "status": "",
+                "certificateAuthority_data": "string",
+                "clientRequestToken": "string",
+                "platformVersion": "string",
+                "tags_string": "string",
+                "encryptionConfig_0_resources_0": "string",
+                "encryptionConfig_0_provider_keyArn": "string",
+                "connectorConfig_activationId": "string",
+                "connectorConfig_activationCode": "string",
+                "connectorConfig_activationExpiry": "",
+                "connectorConfig_provider": "string",
+                "connectorConfig_roleArn": "string",
+                "id": "string",
+                "health_issues_0_code": "",
+                "health_issues_0_message": "string",
+                "health_issues_0_resourceIds_0": "string",
+                "outpostConfig_outpostArns_0": "string",
+                "outpostConfig_controlPlaneInstanceType": "string",
+                "outpostConfig_controlPlanePlacement_groupName": "string"
+            }
+        },
+        {
+            "function_name": "list_clusters",
+            "function_description": "List EKS Clusters",
+            "boto_session_type": "client",
+            "response_format": "FORMAT_3",
+            "function_type": "list",
+            "is_regional": "Yes",
+            "pagination_support": "Yes",
+            "result_keys": [
+                "clusters"
+            ],
+            "json_response": {
+                "cluster": ""
+            }
+        },
+        {
+            "function_name": "list_fargate_profiles",
+            "function_description": "List Farget profiles",
+            "boto_session_type": "client",
+            "response_format": "FORMAT_3",
+            "function_type": "list",
+            "is_regional": "Yes",
+            "pagination_support": "Yes",
+            "result_keys": [
+                "fargateProfileNames"
+            ],
+            "json_response": {
+                "fargateProfileName": ""
+            }
+        }
+    ]
+}

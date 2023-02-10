@@ -1,0 +1,119 @@
+{
+    "service_name": "emr",
+    "functions": [
+        {
+            "function_name": "list_clusters",
+            "function_description": "List Clusters",
+            "boto_session_type": "client",
+            "response_format": "FORMAT_2",
+            "function_type": "list",
+            "is_regional": "Yes",
+            "pagination_support": "Yes",
+            "result_keys": [
+                "Clusters"
+            ],
+            "json_response": {
+                "Id": "string",
+                "Name": "string",
+                "Status_State": "",
+                "Status_StateChangeReason_Code": "",
+                "Status_StateChangeReason_Message": "string",
+                "Status_Timeline_CreationDateTime": "",
+                "Status_Timeline_ReadyDateTime": "",
+                "Status_Timeline_EndDateTime": "",
+                "NormalizedInstanceHours": "",
+                "ClusterArn": "string",
+                "OutpostArn": "string"
+            }
+        },
+        {
+            "function_name": "list_instance_fleets",
+            "function_description": "List Instance fleets of EMR Cluster",
+            "boto_session_type": "client",
+            "response_format": "FORMAT_2",
+            "function_type": "list",
+            "is_regional": "Yes",
+            "pagination_support": "Yes",
+            "result_keys": [
+                "InstanceFleets"
+            ],
+            "json_response": {
+                "Id": "string",
+                "Name": "string",
+                "Status_State": "",
+                "Status_StateChangeReason_Code": "",
+                "Status_StateChangeReason_Message": "",
+                "Status_Timeline_CreationDateTime": "",
+                "Status_Timeline_ReadyDateTime": "",
+                "Status_Timeline_EndDateTime": "",
+                "InstanceFleetType": "",
+                "TargetOnDemandCapacity": "",
+                "TargetSpotCapacity": "",
+                "ProvisionedOnDemandCapacity": "",
+                "ProvisionedSpotCapacity": "",
+                "InstanceTypeSpecifications_0_InstanceType": "string",
+                "InstanceTypeSpecifications_0_WeightedCapacity": "",
+                "InstanceTypeSpecifications_0_BidPrice": "string",
+                "InstanceTypeSpecifications_0_BidPriceAsPercentageOfOnDemandPrice": "",
+                "InstanceTypeSpecifications_0_Configurations_0_Classification": "string",
+                "InstanceTypeSpecifications_0_Configurations_0_Properties_string": "string",
+                "InstanceTypeSpecifications_0_EbsBlockDevices_0_VolumeSpecification_VolumeType": "string",
+                "InstanceTypeSpecifications_0_EbsBlockDevices_0_VolumeSpecification_Iops": "string",
+                "InstanceTypeSpecifications_0_EbsBlockDevices_0_VolumeSpecification_SizeInGB": "string",
+                "InstanceTypeSpecifications_0_EbsBlockDevices_0_VolumeSpecification_Throughput": "string",
+                "InstanceTypeSpecifications_0_EbsBlockDevices_0_Device": "string",
+                "InstanceTypeSpecifications_0_EbsOptimized": "string",
+                "InstanceTypeSpecifications_0_CustomAmiId": "string",
+                "LaunchSpecifications_SpotSpecification_TimeoutDurationMinutes": "string",
+                "LaunchSpecifications_SpotSpecification_TimeoutAction": "",
+                "LaunchSpecifications_SpotSpecification_BlockDurationMinutes": "string",
+                "LaunchSpecifications_SpotSpecification_AllocationStrategy": "capacity-optimized",
+                "LaunchSpecifications_OnDemandSpecification_AllocationStrategy": "lowest-price",
+                "LaunchSpecifications_OnDemandSpecification_CapacityReservationOptions_UsageStrategy": "",
+                "LaunchSpecifications_OnDemandSpecification_CapacityReservationOptions_CapacityReservationPreference": "",
+                "LaunchSpecifications_OnDemandSpecification_CapacityReservationOptions_CapacityReservationResourceGroupArn": "string"
+            }
+        },
+        {
+            "function_name": "list_notebook_executions",
+            "function_description": "List Notebook executions",
+            "boto_session_type": "client",
+            "response_format": "FORMAT_2",
+            "function_type": "list",
+            "is_regional": "Yes",
+            "pagination_support": "Yes",
+            "result_keys": [
+                "NotebookExecutions"
+            ],
+            "json_response": {
+                "NotebookExecutionId": "string",
+                "EditorId": "string",
+                "NotebookExecutionName": "string",
+                "Status": "",
+                "StartTime": "",
+                "EndTime": ""
+            }
+        },
+        {
+            "function_name": "list_studios",
+            "function_description": "List Studios",
+            "boto_session_type": "client",
+            "response_format": "FORMAT_2",
+            "function_type": "list",
+            "is_regional": "Yes",
+            "pagination_support": "Yes",
+            "result_keys": [
+                "Studios"
+            ],
+            "json_response": {
+                "StudioId": "string",
+                "Name": "string",
+                "VpcId": "string",
+                "Description": "string",
+                "Url": "string",
+                "AuthMode": "",
+                "CreationTime": ""
+            }
+        }
+    ]
+}

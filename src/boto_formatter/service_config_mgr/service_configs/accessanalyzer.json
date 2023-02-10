@@ -1,0 +1,58 @@
+{
+    "service_name": "accessanalyzer",
+    "functions": [
+        {
+            "function_name": "list_analyzers",
+            "function_description": "Retrieves a list of analyzers.",
+            "boto_session_type": "client",
+            "response_format": "FORMAT_2",
+            "function_type": "list",
+            "is_regional": "No",
+            "pagination_support": "Yes",
+            "result_keys": [
+                "analyzers"
+            ],
+            "json_response": {
+                "arn": "string",
+                "name": "string",
+                "type": "",
+                "createdAt": "",
+                "lastResourceAnalyzed": "string",
+                "lastResourceAnalyzedAt": "",
+                "tags_string": "string",
+                "status": "",
+                "statusReason_code": ""
+            }
+        },
+        {
+            "function_name": "list_findings",
+            "function_description": "Returns information about the access key IDs associated with the specified IAM user",
+            "boto_session_type": "client",
+            "response_format": "FORMAT_2",
+            "function_type": "list",
+            "is_regional": "No",
+            "pagination_support": "Yes",
+            "result_keys": [
+                "findings"
+            ],
+            "json_response": {
+                "id": "string",
+                "principal_string": "string",
+                "action_0": "string",
+                "resource": "string",
+                "isPublic": "string",
+                "resourceType": "",
+                "condition_string": "string",
+                "createdAt": "",
+                "analyzedAt": "",
+                "updatedAt": "",
+                "status": "",
+                "resourceOwnerAccount": "string",
+                "error": "string",
+                "sources_0_type": "",
+                "sources_0_detail_accessPointArn": "string",
+                "sources_0_detail_accessPointAccount": "string"
+            }
+        }
+    ]
+}

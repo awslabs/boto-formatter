@@ -1,0 +1,49 @@
+{
+    "service_name": "budgets",
+    "functions": [
+        {
+            "function_name": "describe_budgets",
+            "function_description": "Lists all the buedgets",
+            "boto_session_type": "client",
+            "response_format": "FORMAT_2",
+            "function_type": "list",
+            "is_regional": "No",
+            "pagination_support": "Yes",
+            "result_keys": [
+                "Budgets"
+            ],
+            "json_response": {
+                "BudgetName": "string",
+                "BudgetLimit_Amount": "string",
+                "BudgetLimit_Unit": "string",
+                "PlannedBudgetLimits_string_Amount": "string",
+                "PlannedBudgetLimits_string_Unit": "string",
+                "CostFilters_string_0": "string",
+                "CostTypes_IncludeTax": "",
+                "CostTypes_IncludeSubscription": "",
+                "CostTypes_UseBlended": "",
+                "CostTypes_IncludeRefund": "",
+                "CostTypes_IncludeCredit": "",
+                "CostTypes_IncludeUpfront": "",
+                "CostTypes_IncludeRecurring": "",
+                "CostTypes_IncludeOtherSubscription": "",
+                "CostTypes_IncludeSupport": "",
+                "CostTypes_IncludeDiscount": "",
+                "CostTypes_UseAmortized": "",
+                "TimeUnit": "",
+                "TimePeriod_Start": "",
+                "TimePeriod_End": "",
+                "CalculatedSpend_ActualSpend_Amount": "string",
+                "CalculatedSpend_ActualSpend_Unit": "string",
+                "CalculatedSpend_ForecastedSpend_Amount": "string",
+                "CalculatedSpend_ForecastedSpend_Unit": "string",
+                "BudgetType": "",
+                "LastUpdatedTime": "",
+                "AutoAdjustData_AutoAdjustType": "",
+                "AutoAdjustData_HistoricalOptions_BudgetAdjustmentPeriod": "",
+                "AutoAdjustData_HistoricalOptions_LookBackAvailablePeriods": "",
+                "AutoAdjustData_LastAutoAdjustTime": ""
+            }
+        }
+    ]
+}

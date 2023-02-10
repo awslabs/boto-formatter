@@ -1,0 +1,22 @@
+{
+    "service_name": "cloudtrail",
+    "functions": [
+        {
+            "function_name": "list_trails",
+            "function_description": "Lists trails ",
+            "boto_session_type": "client",
+            "response_format": "FORMAT_2",
+            "function_type": "list",
+            "is_regional": "Yes",
+            "pagination_support": "Yes",
+            "result_keys": [
+                "Trails"
+            ],
+            "json_response": {
+                "TrailARN": "string",
+                "Name": "string",
+                "HomeRegion": "string"
+            }
+        }
+    ]
+}

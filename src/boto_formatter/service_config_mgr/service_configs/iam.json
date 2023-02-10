@@ -1,0 +1,195 @@
+{
+    "service_name": "iam",
+    "functions": [
+        {
+            "function_name": "list_users",
+            "function_description": "Lists the IAM users ",
+            "boto_session_type": "client",
+            "response_format": "FORMAT_2",
+            "function_type": "list",
+            "is_regional": "No",
+            "pagination_support": "Yes",
+            "result_keys": [
+                "Users"
+            ],
+            "json_response": {
+                "Path": "string",
+                "UserName": "string",
+                "UserId": "string",
+                "Arn": "string",
+                "CreateDate": "string",
+                "PasswordLastUsed": "string",
+                "PermissionsBoundary_PermissionsBoundaryType": "PermissionsBoundaryPolicy",
+                "PermissionsBoundary_PermissionsBoundaryArn": "string",
+                "Tags_0_Key": "string",
+                "Tags_0_Value": "string"
+            }
+        },
+        {
+            "function_name": "list_access_keys",
+            "function_description": "Returns information about the access key IDs associated with the specified IAM user",
+            "boto_session_type": "client",
+            "response_format": "FORMAT_2",
+            "function_type": "list",
+            "is_regional": "No",
+            "pagination_support": "Yes",
+            "result_keys": [
+                "AccessKeyMetadata"
+            ],
+            "json_response": {
+                "UserName": "required",
+                "AccessKeyId": "required",
+                "Status": "required",
+                "CreateDate": "required"
+            }
+        },
+        {
+            "function_name": "list_account_aliases",
+            "function_description": "Lists the account alias associated with the Amazon Web Services account ",
+            "boto_session_type": "client",
+            "response_format": "FORMAT_3",
+            "function_type": "list",
+            "is_regional": "No",
+            "pagination_support": "Yes",
+            "result_keys": [
+                "AccountAliases"
+            ],
+            "json_response": {
+                "AccountAliase": ""
+            }
+        },
+        {
+            "function_name": "list_attached_group_policies",
+            "function_description": "Lists all managed policies that are attached to the specified IAM group",
+            "boto_session_type": "client",
+            "response_format": "FORMAT_2",
+            "function_type": "list",
+            "is_regional": "No",
+            "pagination_support": "Yes",
+            "result_keys": [
+                "AttachedPolicies"
+            ],
+            "json_response": {
+                "PolicyName": "required",
+                "PolicyArn": "required"
+            }
+        },
+        {
+            "function_name": "list_attached_role_policies",
+            "function_description": "Lists all managed policies that are attached to the specified IAM role",
+            "boto_session_type": "client",
+            "response_format": "FORMAT_2",
+            "function_type": "list",
+            "is_regional": "No",
+            "pagination_support": "Yes",
+            "result_keys": [
+                "AttachedPolicies"
+            ],
+            "json_response": {
+                "PolicyName": "required",
+                "PolicyArn": "required"
+            }
+        },
+        {
+            "function_name": "list_attached_user_policies",
+            "function_description": "Lists all managed policies that are attached to the specified IAM role",
+            "boto_session_type": "client",
+            "response_format": "FORMAT_2",
+            "function_type": "list",
+            "is_regional": "No",
+            "pagination_support": "Yes",
+            "result_keys": [
+                "AttachedPolicies"
+            ],
+            "json_response": {
+                "PolicyName": "required",
+                "PolicyArn": "required"
+            }
+        },
+        {
+            "function_name": "list_group_policies",
+            "function_description": "Lists all managed policies that are attached to the specified IAM role",
+            "boto_session_type": "client",
+            "response_format": "FORMAT_3",
+            "function_type": "list",
+            "is_regional": "No",
+            "pagination_support": "Yes",
+            "result_keys": [
+                "PolicyNames"
+            ],
+            "json_response": {
+                "PolicyName": ""
+            }
+        },
+        {
+            "function_name": "list_groups",
+            "function_description": "Lists all managed policies that are attached to the specified IAM role",
+            "boto_session_type": "client",
+            "response_format": "FORMAT_3",
+            "function_type": "list",
+            "is_regional": "No",
+            "pagination_support": "Yes",
+            "result_keys": [
+                "Groups"
+            ],
+            "json_response": {
+                "Groups": " "
+            }
+        },
+        {
+            "function_name": "list_policies",
+            "function_description": "List All the IAM Polices",
+            "boto_session_type": "client",
+            "response_format": "FORMAT_2",
+            "function_type": "list",
+            "is_regional": "No",
+            "pagination_support": "Yes",
+            "result_keys": [
+                "Policies"
+            ],
+            "json_response": {
+                "PolicyName": "required",
+                "PolicyId": "required",
+                "Arn": "required",
+                "Path": "string",
+                "DefaultVersionId": "string",
+                "AttachmentCount": "string",
+                "PermissionsBoundaryUsageCount": "string",
+                "IsAttachable": "string",
+                "Description": "string",
+                "CreateDate": "required",
+                "UpdateDate": "required",
+                "Tags_0_Key": "string",
+                "Tags_0_Value": "string"
+            }
+        },
+        {
+            "function_name": "list_roles",
+            "function_description": "Roles",
+            "boto_session_type": "client",
+            "response_format": "FORMAT_2",
+            "function_type": "list",
+            "is_regional": "No",
+            "pagination_support": "Yes",
+            "result_keys": [
+                "Roles"
+            ],
+            "json_response": {
+                "Path": "string",
+                "RoleName": "required",
+                "RoleId": "required",
+                "Arn": "required",
+                "CreateDate": "string",
+                "AssumeRolePolicyDocument": "string",
+                "Description": "string",
+                "MaxSessionDuration": "string",
+                "PermissionsBoundary_PermissionsBoundaryType": "string",
+                "PermissionsBoundary_PermissionsBoundaryArn": "string",
+                "Tags_0_Key": "string",
+                "Tags_0_Value": "string",
+                "RoleLastUsed_LastUsedDate": "string",
+                "RoleLastUsed_Region": "string"
+            }
+        }
+    ]
+}

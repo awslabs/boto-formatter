@@ -1,0 +1,41 @@
+{
+    "service_name": "cloudwatch",
+    "functions": [
+        {
+            "function_name": "list_dashboards",
+            "function_description": "List of the dashboards for your account ",
+            "boto_session_type": "client",
+            "response_format": "FORMAT_2",
+            "function_type": "list",
+            "is_regional": "Yes",
+            "pagination_support": "Yes",
+            "result_keys": [
+                "DashboardEntries"
+            ],
+            "json_response": {
+                "DashboardName": "string",
+                "DashboardArn": "string",
+                "LastModified": "string",
+                "Size": "string"
+            }
+        },
+        {
+            "function_name": "list_metrics",
+            "function_description": "List the specified metrics",
+            "boto_session_type": "client",
+            "response_format": "FORMAT_2",
+            "function_type": "list",
+            "is_regional": "Yes",
+            "pagination_support": "Yes",
+            "result_keys": [
+                "Metrics"
+            ],
+            "json_response": {
+                "Namespace": "string",
+                "MetricName": "string",
+                "Dimensions_0_Name": "string",
+                "Dimensions_0_Value": "string"
+            }
+        }
+    ]
+}

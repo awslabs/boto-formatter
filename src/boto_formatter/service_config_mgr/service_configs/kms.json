@@ -1,0 +1,21 @@
+{
+    "service_name": "kms",
+    "functions": [
+        {
+            "function_name": "list_keys",
+            "function_description": "Gets a list of all KMS keys.",
+            "boto_session_type": "client",
+            "response_format": "FORMAT_2",
+            "function_type": "list",
+            "is_regional": "Yes",
+            "pagination_support": "Yes",
+            "result_keys": [
+                "Keys"
+            ],
+            "json_response": {
+                "KeyId": "string",
+                "KeyArn": "string"
+            }
+        }
+    ]
+}
