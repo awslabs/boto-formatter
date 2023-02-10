@@ -30,7 +30,7 @@ list_roles()
 
 ```
 ## Usage
-[Please click on each function to see the usage/example](https://github.com/awslabs/boto-formatter/blob/main/docs/supported_services.md)
+Please click on [Functions to see the usage/example](https://github.com/awslabs/boto-formatter/blob/main/docs/supported_services.md)
 
 ## Setup
 Click [here](https://github.com/awslabs/boto-formatter/blob/main/docs/setup.md)
