@@ -16,7 +16,7 @@ git clone https://github.com/awslabs/boto-formatter.git
 
 **Unix/macOS**
 ```
-cd boto_formatter
+cd boto-formatter
 
 python3 -m pip install --upgrade build
 
@@ -25,7 +25,7 @@ python3 -m build
 
 **Windows**
 ```
-cd boto_formatter
+cd boto-formatter
 
 py -m pip install --upgrade build
 
@@ -113,7 +113,7 @@ Output folder will be created with list of s3 buckets. Review the sample code (s
 
 ## Optional: Explore additional features
 
-You can generate the output as csv, json. You can also send the output to file or print list on command prompt to explore these options (click here)[https://github.com/awslabs/boto-formatter.git/-/blob/main/tests/general_usage.py]
+You can explore other AWS services like iam, s3 ..and generate the output as csv, json. You can also send the output to file or print list on command prompt to explore these options (click here)[https://github.com/awslabs/boto-formatter.git/-/blob/main/tests/general_usage.py]
 
 
 # Cleanup
