@@ -50,7 +50,7 @@ To test the functionality, copy any usage file example s3_usage.py from **tests/
 ### 4. Create Python virtual environment and install libraries
 Follow the instruction depending upon your OS
 
-**Unix/macOS**
+**Instruction for : Unix/macOS**
 
 4.1 Create virtual environment
 ```
@@ -66,7 +66,8 @@ pip install boto_formatter-1.0.0.tar.gz
 pip install boto3
 
 ```
-**Windows**
+**Instruction for : Windows**
+
 4.1 Create virtual environment
 ```
 python -m venv .venv
@@ -89,7 +90,7 @@ pip install boto3
 
 ```
 
-**You have successfully installed boto_formatter **
+**You have successfully installed boto_formatter**
 
 # Test
 
@@ -112,7 +113,7 @@ Output folder will be created with list of s3 buckets. Review the sample code (s
 
 ## Optional: Explore additional features
 
-You can generate the output as csv, json. You can also send the output to file or print list on command prompt to explore these options (click here)[https://github.com/awslabs/boto-formatter/blob/main/tests/general_usage.py]
+You can generate the output as csv, json. You can also send the output to file or print on command prompt.To explore these options (click here)[https://github.com/awslabs/boto-formatter/blob/main/tests/general_usage.py]
 
 
 # Cleanup
