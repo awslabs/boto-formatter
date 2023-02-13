@@ -9,10 +9,10 @@ Download python https://www.python.org/downloads/
 ### 1. Clone the Repository
 Clone the boto_formatter github repository to your computer using the following command
 ```
-git clone https://github.com/awslabs/boto-formatter
+git clone https://github.com/awslabs/boto-formatter.git
 ```
 
-### 2. Generate distribution archives from source code 
+### 2. Generating distribution archives from source code 
 
 **Unix/macOS**
 ```
@@ -47,10 +47,10 @@ Copy the distribution file **boto_formatter-1.0.0.tar.gz** to project directory.
 
 To test the functionality, copy any usage file example s3_usage.py from **tests/s3_usage.py** to project directory 
 
-### 4. Create Python virtual environment and install libraries
+### 4. Create Python virtual environment
 Follow the instruction depending upon your OS
 
-**Instruction for : Unix/macOS**
+**Unix/macOS**
 
 4.1 Create virtual environment
 ```
@@ -66,7 +66,7 @@ pip install boto_formatter-1.0.0.tar.gz
 pip install boto3
 
 ```
-**Instruction for : Windows**
+**Windows**
 
 4.1 Create virtual environment
 ```
@@ -90,7 +90,7 @@ pip install boto3
 
 ```
 
-**You have successfully installed boto_formatter**
+**You have successfully installed boto_formatter **
 
 # Test
 
@@ -106,14 +106,14 @@ python3 s3_usage.py
 python s3_usage.py
 ```
 
-Output folder will be created with list of s3 buckets. Review the sample code (s3_usage.py) [https://github.com/awslabs/boto-formatter/blob/main/tests/s3_usage.py]
+Output folder will be created with list of s3 buckets. Review the sample code (s3_usage.py) [https://github.com/awslabs/boto-formatter.git/-/blob/main/tests/s3_usage.py]
 
 <p align="center">
   <img src="../imgs/s3_list_out.PNG"  title="hover text">
 
 ## Optional: Explore additional features
 
-You can generate the output as csv, json. You can also send the output to file or print on command prompt.To explore these options (click here)[https://github.com/awslabs/boto-formatter/blob/main/tests/general_usage.py]
+You can generate the output as csv, json. You can also send the output to file or print list on command prompt to explore these options (click here)[https://github.com/awslabs/boto-formatter.git/-/blob/main/tests/general_usage.py]
 
 
 # Cleanup
