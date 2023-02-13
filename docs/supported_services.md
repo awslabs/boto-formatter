@@ -10,7 +10,7 @@ Click on service to see the usage
 <th><a href="https://github.com/awslabs/boto-formatter/blob/main/tests/general_usage.py">General usage</a></th>
 </tr>
 <tr>
-<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/general_usage.py">accessanalyzer</a></td>
+<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/accessanalyzer_usage.py">accessanalyzer</a></td>
 <td>
 <ul>
 <li>1.list_analyzers</li>
@@ -19,7 +19,7 @@ Click on service to see the usage
 </td>
 </tr>
 <tr>
-<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/general_usage.py">apigateway</a></td>
+<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/apigateway_usage.py">apigateway</a></td>
 <td>
 <ul>
 <li>3.get_rest_apis</li>
@@ -27,7 +27,7 @@ Click on service to see the usage
 </td>
 </tr>
 <tr>
-<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/general_usage.py">budgets</a></td>
+<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/budgets_usage.py">budgets</a></td>
 <td>
 <ul>
 <li>4.describe_budgets</li>
@@ -35,7 +35,7 @@ Click on service to see the usage
 </td>
 </tr>
 <tr>
-<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/general_usage.py">cloudfront</a></td>
+<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/cloudfront_usage.py">cloudfront</a></td>
 <td>
 <ul>
 <li>5.list_distributions</li>
@@ -44,7 +44,7 @@ Click on service to see the usage
 </td>
 </tr>
 <tr>
-<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/general_usage.py">cloudtrail</a></td>
+<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/cloudtrail_usage.py">cloudtrail</a></td>
 <td>
 <ul>
 <li>7.list_trails</li>
@@ -52,7 +52,7 @@ Click on service to see the usage
 </td>
 </tr>
 <tr>
-<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/general_usage.py">cloudwatch</a></td>
+<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/cloudwatch_usage.py">cloudwatch</a></td>
 <td>
 <ul>
 <li>8.list_dashboards</li>
@@ -61,7 +61,7 @@ Click on service to see the usage
 </td>
 </tr>
 <tr>
-<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/general_usage.py">codecommit</a></td>
+<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/codecommit_usage.py">codecommit</a></td>
 <td>
 <ul>
 <li>10.list_repositories</li>
@@ -69,7 +69,7 @@ Click on service to see the usage
 </td>
 </tr>
 <tr>
-<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/general_usage.py">dynamodb</a></td>
+<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/dynamodb_usage.py">dynamodb</a></td>
 <td>
 <ul>
 <li>11.list_tables</li>
@@ -77,7 +77,7 @@ Click on service to see the usage
 </td>
 </tr>
 <tr>
-<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/general_usage.py">ec2</a></td>
+<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/ec2_usage.py">ec2</a></td>
 <td>
 <ul>
 <li>12.describe_addresses</li>
@@ -99,7 +99,7 @@ Click on service to see the usage
 </td>
 </tr>
 <tr>
-<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/general_usage.py">ecs</a></td>
+<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/ecs_usage.py">ecs</a></td>
 <td>
 <ul>
 <li>27.list_clusters</li>
@@ -109,7 +109,7 @@ Click on service to see the usage
 </td>
 </tr>
 <tr>
-<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/general_usage.py">efs</a></td>
+<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/efs_usage.py">efs</a></td>
 <td>
 <ul>
 <li>30.describe_file_systems</li>
@@ -117,7 +117,7 @@ Click on service to see the usage
 </td>
 </tr>
 <tr>
-<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/general_usage.py">eks</a></td>
+<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/eks_usage.py">eks</a></td>
 <td>
 <ul>
 <li>31.describe_cluster</li>
@@ -127,7 +127,7 @@ Click on service to see the usage
 </td>
 </tr>
 <tr>
-<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/general_usage.py">elasticache</a></td>
+<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/elasticache_usage.py">elasticache</a></td>
 <td>
 <ul>
 <li>34.describe_cache_clusters</li>
@@ -135,7 +135,7 @@ Click on service to see the usage
 </td>
 </tr>
 <tr>
-<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/general_usage.py">elbv2</a></td>
+<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/elbv2_usage.py">elbv2</a></td>
 <td>
 <ul>
 <li>35.describe_load_balancers</li>
@@ -143,7 +143,7 @@ Click on service to see the usage
 </td>
 </tr>
 <tr>
-<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/general_usage.py">emr-serverless</a></td>
+<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/emr-serverless_usage.py">emr-serverless</a></td>
 <td>
 <ul>
 <li>36.list_applications</li>
@@ -152,7 +152,7 @@ Click on service to see the usage
 </td>
 </tr>
 <tr>
-<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/general_usage.py">emr</a></td>
+<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/emr_usage.py">emr</a></td>
 <td>
 <ul>
 <li>38.list_clusters</li>
@@ -163,7 +163,7 @@ Click on service to see the usage
 </td>
 </tr>
 <tr>
-<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/general_usage.py">iam</a></td>
+<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/iam_usage.py">iam</a></td>
 <td>
 <ul>
 <li>42.list_users</li>
@@ -180,7 +180,7 @@ Click on service to see the usage
 </td>
 </tr>
 <tr>
-<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/general_usage.py">kms</a></td>
+<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/kms_usage.py">kms</a></td>
 <td>
 <ul>
 <li>52.list_keys</li>
@@ -188,7 +188,7 @@ Click on service to see the usage
 </td>
 </tr>
 <tr>
-<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/general_usage.py">lambda</a></td>
+<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/lambda_usage.py">lambda</a></td>
 <td>
 <ul>
 <li>53.list_functions</li>
@@ -197,7 +197,7 @@ Click on service to see the usage
 </td>
 </tr>
 <tr>
-<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/general_usage.py">organizations</a></td>
+<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/organizations_usage.py">organizations</a></td>
 <td>
 <ul>
 <li>55.list_accounts</li>
@@ -206,7 +206,7 @@ Click on service to see the usage
 </td>
 </tr>
 <tr>
-<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/general_usage.py">rds</a></td>
+<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/rds_usage.py">rds</a></td>
 <td>
 <ul>
 <li>57.describe_db_clusters</li>
@@ -218,7 +218,7 @@ Click on service to see the usage
 </td>
 </tr>
 <tr>
-<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/general_usage.py">redshift-serverless</a></td>
+<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/redshift-serverless_usage.py">redshift-serverless</a></td>
 <td>
 <ul>
 <li>62.list_namespaces</li>
@@ -227,7 +227,7 @@ Click on service to see the usage
 </td>
 </tr>
 <tr>
-<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/general_usage.py">redshift</a></td>
+<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/redshift_usage.py">redshift</a></td>
 <td>
 <ul>
 <li>64.describe_clusters</li>
@@ -235,7 +235,7 @@ Click on service to see the usage
 </td>
 </tr>
 <tr>
-<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/general_usage.py">route53</a></td>
+<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/route53_usage.py">route53</a></td>
 <td>
 <ul>
 <li>65.list_cidr_blocks</li>
@@ -246,7 +246,7 @@ Click on service to see the usage
 </td>
 </tr>
 <tr>
-<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/general_usage.py">route53domains</a></td>
+<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/route53domains_usage.py">route53domains</a></td>
 <td>
 <ul>
 <li>69.list_domains</li>
@@ -255,7 +255,7 @@ Click on service to see the usage
 </td>
 </tr>
 <tr>
-<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/general_usage.py">s3</a></td>
+<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/s3_usage.py">s3</a></td>
 <td>
 <ul>
 <li>71.create_bucket</li>
@@ -266,7 +266,7 @@ Click on service to see the usage
 </td>
 </tr>
 <tr>
-<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/general_usage.py">sns</a></td>
+<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/sns_usage.py">sns</a></td>
 <td>
 <ul>
 <li>75.list_subscriptions</li>
@@ -275,7 +275,7 @@ Click on service to see the usage
 </td>
 </tr>
 <tr>
-<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/general_usage.py">sqs</a></td>
+<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/sqs_usage.py">sqs</a></td>
 <td>
 <ul>
 <li>77.list_queues</li>
