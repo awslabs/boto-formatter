@@ -9,7 +9,7 @@ It will reduce your effort of writing custom implementation for common usecase l
 You simply add decorator to your python function and it will convert the response. By adding below decorator client. list functions() response will be converted in attached .csv file in output folder of invoking python script. You can see the difference in lines of code when using boto_formatter and without boto_formatter. You can also see the different in output .csv and raw json file returned by list functions.
 
 <p align="center">
-  <img src="../imgs/boto_formatter.PNG"  title="boto_formatter">
+  <img src="imgs/boto_formatter.PNG"  title="boto_formatter">
 
 ```
 import boto3
