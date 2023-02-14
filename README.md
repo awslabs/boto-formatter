@@ -2,10 +2,10 @@
 ## What is boto _formatter?
 boto_response_formatter is decorator that convert standard boto3 function response (returned as python list) in flattened JSON or tabular CSV formats for [list of supported services and functions](https://github.com/awslabs/boto-formatter/blob/main/docs/supported_services.md). You can output the response to print, file or send flattened columnar JSON list to another function to continue your process.
 
- boto_formatter simplifies the process and reduce the need of writing custom codebase potentially of 100s of line of code to 4-5 lines for simple usecases like generating list of lambda fucntions or list of cloudfront distriubtions with all the attributes that Pyton SDK provides.
+boto_formatter simplifies the process and reduce the need of writing custom codebase potentially of 100s of line of code to 4-5 lines for simple usecases like generating list of lambda fucntions or list of cloudfront distriubtions with all the attributes that Pyton SDK provides.
 
 ## How it works?
-You simply add decorator to your python function ( the  function which is returning   list from boto3 function) and it will convert the list to flatten JSON or comman seperate values (CSV). 
+You simply add decorator to your python function (The function which is returning   list from boto3 function) and it will convert the list to flatten JSON or comman seperate values (CSV). 
 
 <p align="center">
   <img src="imgs/boto_formatter.PNG"  title="boto_formatter">
