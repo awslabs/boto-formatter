@@ -362,7 +362,8 @@ This library is licensed under the MIT-0 License. See the LICENSE file.
 
 
 ## Considerations
-* Library is not designed for latency-based requirements. So, if you have high latency requirements, please evaluate library in lower enviornments (dev,QA) before using in high latency-based environment.
-* When the format_type is selected as "csv" ;boto_formatter will skip the columns which contains "," in value.
+- Library is not designed for latency-based requirements. So, if you have high latency requirements, please evaluate library in lower enviornments (dev,QA) before using in high latency-based environment.
+- When the format_type is selected as "csv" ;boto_formatter will skip the columns which contains "," in value.
+- Majority of the cases Library returns formatted response of all the attributes that Python SDK provides. However, for some functions it many not returns 100% of the attributes that Python SDK provides.
 
 
