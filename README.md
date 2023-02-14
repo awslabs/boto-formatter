@@ -1,16 +1,16 @@
 # boto_formatter
 ## What is boto _formatter?
-boto_response_formatter is decorator that convert standard boto3 function response (returned as python list) in flattened JSON or tabular CSV formats for [list of supported services and functions](https://gitlab.aws.dev/rajeabh/boto_formatter/-/blob/main/docs/supported_services.md). You can output the response to print, file or send flattened columnar JSON list to another function to continue your process.
+boto_response_formatter is decorator that convert standard boto3 function response (returned as python list) in flattened JSON or tabular CSV formats for [list of supported services and functions](https://github.com/awslabs/boto-formatter/blob/main/docs/supported_services.md). You can output the response to print, file or send flattened columnar JSON list to another function to continue your process.
 
-For simple usecases like generate list of lambda fucntion or list of cloudfront distriubtion with all the attributes that SDK sends back ,boto_formatter it simplifies the process and reduce the need of writing custom codebase potentially of 100s of line of code to 4-5 lines .
+ boto_formatter simplifies the process and reduce the need of writing custom codebase potentially of 100s of line of code to 4-5 lines for simple usecases like generating list of lambda fucntions or list of cloudfront distriubtions with all the attributes that Pyton SDK provides.
 
 ## How it works?
-You simply add decorator to your python function and it will convert the response to flatten JSON or comman seperate values (CSV). 
+You simply add decorator to your python function ( the  function which is returning   list from boto3 function) and it will convert the list to flatten JSON or comman seperate values (CSV). 
 
 <p align="center">
   <img src="imgs/boto_formatter.PNG"  title="boto_formatter">
 
-By adding  decorator **@boto_response_formatter** to a function  list_policies_fmt() the response of the function will be converted to .csv and response will also be saved in a file iam_list_polices_<date>.csv in a output folder located in the same directory of invoking python script. 
+By adding  decorator **@boto_response_formatter** to a function as example shown below in  list_policies_fmt() function the response of the function will be converted to .csv . Generated csv response will also be saved in a file iam_list_polices_<date>.csv in a output folder located in the same directory of invoking python script. 
 You can also notice the difference in lines of code when using boto_formatter and without boto_formatter to achive the same result of parsing and flattening the json response.
 
 ```
@@ -62,11 +62,11 @@ list_policies_without_boto_formatter()
 
 
 ## Setup
-For Installation setup click [here](https://gitlab.aws.dev/rajeabh/boto_formatter/-/blob/main/docs/setup.md)
+For Installation setup click [here](https://github.com/awslabs/boto-formatter/blob/main/docs/setup.md)
 
 
 ## Usage
-[Please click on each function to see the usage/example](https://gitlab.aws.dev/rajeabh/boto_formatter/-/blob/main/docs/supported_services.md)
+[Please click on each function to see the usage/example](https://github.com/awslabs/boto-formatter/blob/main/docs/supported_services.md)
 
 Click on service to see the usage 
 <table>
