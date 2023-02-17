@@ -61,9 +61,48 @@ list_policies_without_boto_formatter()
 ```
 
 
-## Setup
-For Installation setup click [here](https://github.com/awslabs/boto-formatter/blob/main/docs/setup.md)
+## Installation 
 
+**boto-formatter** is distributed on PyPI. Easiest way to install it is with pip
+
+Create a virtual environment (optional):
+
+```
+python3 -m venv .venv
+```
+Activate enviornment:
+
+```
+source .venv/bin/activate
+```
+
+Install boto-formatter and boto3:
+
+```
+pip install boto-formatter
+pip install boto3
+```
+
+Run boto-formatter code:
+
+```
+import boto3
+from  boto_formatter.core_formatter import boto_response_formatter
+
+# With boto_formatter
+@boto_response_formatter(service_name="iam", function_name="list_policies", format_type="csv", output_to="file" ,pagination="yes")
+def list_policies_fmt():
+    client = boto3.client('iam')
+    paginator = client.get_paginator('list_policies')
+    result = []
+    for page in paginator.paginate():
+        result.append(page)
+    return result
+```
+
+For building Installation from source code click [here](https://github.com/awslabs/boto-formatter/blob/main/docs/setup.md)
+
+[Check Addtional examples here](https://github.com/awslabs/boto-formatter/blob/main/tests)
 
 ## Usage
 [Please click on each function to see the usage/example](https://github.com/awslabs/boto-formatter/blob/main/docs/supported_services.md)
