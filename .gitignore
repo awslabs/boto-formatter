@@ -1,0 +1,4 @@
+dist/
+src/boto_formatter.egg-info/
+tests/output
+tests/__pycache__/
