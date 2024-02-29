@@ -1,4 +1,3 @@
-
 import logging
 from sys import modules
 import os
@@ -46,26 +45,35 @@ def service_response_formatter(service_name, function_name, response, attributes
     json_config = None
     result = None
     function_config = ServiceConfig.get_service_function_details(
-        service_name, function_name)
+        service_name, function_name
+    )
     json_config = function_config["json_response"]
     response_format = function_config["response_format"]
     # Some columns breaks as comma so for csv format put required only condition
 
     start_time = time.time()
     result = __process_response(
-        function_config, json_config, format_type, required_only, response, pagination)
-    logger.debug("Flattening JSON took--- %s seconds ---" %
-                 (time.time() - start_time))
+        function_config, json_config, format_type, required_only, response, pagination
+    )
+    logger.debug("Flattening JSON took--- %s seconds ---" % (time.time() - start_time))
     if format_type:
         result = __format_ouput(result, format_type)
     if output_to:
-        result = __ouput_to(service_name, function_name,
-                            result, output_to, format_type,
-                            output_path, response_format)
+        result = __ouput_to(
+            service_name,
+            function_name,
+            result,
+            output_to,
+            format_type,
+            output_path,
+            response_format,
+        )
     return result
 
 
-def __process_response(function_config, json_config, format_type, required_only, response, pagination):
+def __process_response(
+    function_config, json_config, format_type, required_only, response, pagination
+):
     """
     :param function_config : function defined in service_config.json
     :param json_config: reference response
@@ -80,7 +88,10 @@ def __process_response(function_config, json_config, format_type, required_only,
     if "result_keys" in function_config.keys():
         result_keys = function_config["result_keys"]
     if required_only is None and format_type is not None:
-        if "csv_enforced_required_only" in function_config.keys() and format_type == "csv":
+        if (
+            "csv_enforced_required_only" in function_config.keys()
+            and format_type == "csv"
+        ):
             required_only = "Yes"
     # FORMAT_1 : JSON single record
     # FORMAT_2 : JSON contains List of JSON
@@ -95,16 +106,28 @@ def __process_response(function_config, json_config, format_type, required_only,
                 if "prefix_columns" in item.keys():
                     prefix_columns = item["prefix_columns"]
                 for obj in result:
-                    final_result.extend(json_util.format_json_list(json_config, json_util.format_response_for_result_keys(
-                        obj, result_keys), required_only, prefix_columns))
+                    final_result.extend(
+                        json_util.format_json_list(
+                            json_config,
+                            json_util.format_response_for_result_keys(obj, result_keys),
+                            required_only,
+                            prefix_columns,
+                        )
+                    )
         else:
             for item in response:
                 result = item["result"]
                 prefix_columns = None
                 if "prefix_columns" in item.keys():
                     prefix_columns = item["prefix_columns"]
-                final_result.extend(json_util.format_json_list(json_config, json_util.format_response_for_result_keys(
-                    result, result_keys), required_only, prefix_columns))
+                final_result.extend(
+                    json_util.format_json_list(
+                        json_config,
+                        json_util.format_response_for_result_keys(result, result_keys),
+                        required_only,
+                        prefix_columns,
+                    )
+                )
     elif response_format == "FORMAT_1":
         final_result = json_util.format_json_object(json_config, response)
 
@@ -118,16 +141,28 @@ def __process_response(function_config, json_config, format_type, required_only,
                 if "prefix_columns" in item.keys():
                     prefix_columns = item["prefix_columns"]
                 for obj in result:
-                    final_result.extend(json_util.format_str_list(json_config, json_util.format_response_for_result_keys(
-                        obj, result_keys), required_only, prefix_columns))
+                    final_result.extend(
+                        json_util.format_str_list(
+                            json_config,
+                            json_util.format_response_for_result_keys(obj, result_keys),
+                            required_only,
+                            prefix_columns,
+                        )
+                    )
         else:
             for item in response:
                 result = item["result"]
                 prefix_columns = None
                 if "prefix_columns" in item.keys():
                     prefix_columns = item["prefix_columns"]
-                final_result.extend(json_util.format_str_list(json_config, json_util.format_response_for_result_keys(
-                    result, result_keys), required_only, prefix_columns))
+                final_result.extend(
+                    json_util.format_str_list(
+                        json_config,
+                        json_util.format_response_for_result_keys(result, result_keys),
+                        required_only,
+                        prefix_columns,
+                    )
+                )
 
     return final_result
 
@@ -144,7 +179,15 @@ def __format_ouput(result, format_type):
         return result
 
 
-def __ouput_to(service_name, function_name, result, output_to, format_type, output_path, response_format):
+def __ouput_to(
+    service_name,
+    function_name,
+    result,
+    output_to,
+    format_type,
+    output_path,
+    response_format,
+):
     """
     :param service_name :service_name like s3, lambda
     :param function_name: function name like list_buckets
@@ -161,10 +204,12 @@ def __ouput_to(service_name, function_name, result, output_to, format_type, outp
             file_path = None
             if format_type == "csv":
                 file_path = json_util.save_csv(
-                    result, service_name, function_name, output_path)
+                    result, service_name, function_name, output_path
+                )
             else:
                 file_path = json_util.save_json(
-                    result, service_name, function_name, output_path)
+                    result, service_name, function_name, output_path
+                )
         return file_path
     else:
         return result
