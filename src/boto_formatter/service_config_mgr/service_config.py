@@ -3,9 +3,10 @@ Read all the service definations from service_configs and store the values
 in dictionary.
 
 """
+
+import json
 import logging
 import os
-import json
 
 logging.basicConfig(level=logging.ERROR)
 logger = logging.getLogger()
@@ -46,17 +47,16 @@ class ServiceConfig:
                 service_name = get_service_name(service_file)
                 logger.info("{}.json found ".format(service_name))
                 file_path = os.path.join(dir_path_service, service_file)
-                f = open(file_path)
-                temp_data = json.load(f)
-                service_name = temp_data["service_name"]
-                ServiceConfig.__data[service_name] = {}
-                ServiceConfig.__data[service_name]["service_name"] = service_name
-                for function_details in temp_data["functions"]:
-                    function_name = function_details["function_name"]
-                    ServiceConfig.__data[service_name][
-                        function_name
-                    ] = ServiceConfig.__process_function_details(function_details)
-                f.close()
+                with open(file_path) as f:
+                    temp_data = json.load(f)
+                    service_name = temp_data["service_name"]
+                    ServiceConfig.__data[service_name] = {}
+                    ServiceConfig.__data[service_name]["service_name"] = service_name
+                    for function_details in temp_data["functions"]:
+                        function_name = function_details["function_name"]
+                        ServiceConfig.__data[service_name][function_name] = (
+                            ServiceConfig.__process_function_details(function_details)
+                        )
         except KeyError as err:
             logger.error(
                 "Please check service_config.json file . File syntax is not correct."
@@ -85,17 +85,20 @@ class ServiceConfig:
             for service_file in os.listdir(dir_path_service):
                 if service_name == get_service_name(service_file):
                     file_path = os.path.join(dir_path_service, service_file)
-                    f = open(file_path)
-                    temp_data = json.load(f)
-                    service_name = temp_data["service_name"]
-                    ServiceConfig.__data[service_name] = {}
-                    ServiceConfig.__data[service_name]["service_name"] = service_name
-                    for function_details in temp_data["functions"]:
-                        function_name = function_details["function_name"]
+                    with open(file_path) as f:
+                        temp_data = json.load(f)
+                        service_name = temp_data["service_name"]
+                        ServiceConfig.__data[service_name] = {}
                         ServiceConfig.__data[service_name][
-                            function_name
-                        ] = ServiceConfig.__process_function_details(function_details)
-                    f.close()
+                            "service_name"
+                        ] = service_name
+                        for function_details in temp_data["functions"]:
+                            function_name = function_details["function_name"]
+                            ServiceConfig.__data[service_name][function_name] = (
+                                ServiceConfig.__process_function_details(
+                                    function_details
+                                )
+                            )
         except KeyError as err:
             logger.error(
                 "Please check service_config.json file . File syntax is not correct."

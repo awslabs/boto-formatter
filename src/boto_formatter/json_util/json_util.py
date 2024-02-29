@@ -251,12 +251,12 @@ def save_csv(csv_data, service_name, function_name, dir_path):
     file_full_path = None
     if len(csv_data) > 0:
         file_full_path = get_file_path(service_name, function_name, dir_path, "csv")
-        f = open(file_full_path, "w")
-        for row in csv_data:
-            f.write(row + "\n")
-        print("RESULT : File is generated at location {} ".format(file_full_path))
+        with open(file_full_path, "w") as f:
+            for row in csv_data:
+                f.write(row + "\n")
+        print(f"RESULT : File is generated at location {file_full_path} ")
     else:
-        print("RESULT : No records . ")
+        print("RESULT : No records.")
     return file_full_path
 
 
