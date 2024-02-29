@@ -114,7 +114,7 @@ def format_json_list(json_config, json_object_list, required_only, prefix_column
         if First_record:
             if len(keys_present_list) == 0:
                 raise ValueError(
-                    "Zero record keys are matching. Check the JSON result is appropriate format"
+                    "Zero record keys are matching. Check that the JSON result is in the appropriate format. "
                 )
         First_record = False
         result_json_list.append(result_row)
@@ -177,7 +177,7 @@ def format_json_object(json_config, json_object_raw):
             keys_present_list.append(json_config_key)
         else:
             result_row[json_config_key] = ""
-    # 5. Append Extra Cloumns as pipe seprated Key/Value
+    # 5. Append Extra Cloumns as pipe separated Key/Value
     extra_rows = [i for i in json_object_keys if i not in keys_present_list]
     for extra_row_key in extra_rows:
         result_row[extra_row_key] = "{}|{}".format(
@@ -187,17 +187,20 @@ def format_json_object(json_config, json_object_raw):
     return result_row
 
 
-def get_csv_data(result_json_list):
+def get_csv_data(result_json_list, separator=";"):
     """
-    :param flattend json object list
+    :param flattened json object list
     :return: list of comma seperated string
     """
     csv_data = []
     if len(result_json_list) > 0:
         logger.debug(result_json_list)
-        csv_data.append(",".join(result_json_list[0].keys()))
+        # CSV header
+        csv_data.append(separator.join(result_json_list[0].keys()))
+        # CSV data
         for json_obj in result_json_list:
-            csv_data.append(",".join(json_obj.values()))
+            csv_data.append(separator.join(json_obj.values()))
+            # csv_data.append(separator.join(map(str, json_obj.values())))
     return csv_data
 
 

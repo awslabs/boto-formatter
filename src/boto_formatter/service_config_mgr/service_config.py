@@ -1,7 +1,6 @@
 """
-Read all the service definations from service_configs and store the values
+Read all the service definitions from service_configs and store the values
 in dictionary.
-
 """
 
 import json
@@ -21,12 +20,10 @@ def get_service_name(file_name):
     """
     json_file_name = None
     try:
-        json_file_name = file_name[0 : len(file_name) - 5]
+        json_file_name = file_name.removesuffix(".json")
     except Exception as err:
         logger.error(err)
-        ERROR_MESSAGE = " Invalid file {} found in service_config directory. service_config shoudl contain only .json files".format(
-            file_name
-        )
+        ERROR_MESSAGE = f"Invalid file {file_name} found in service_config directory. service_config should contain only .json files"
         raise ValueError(ERROR_MESSAGE)
 
     return json_file_name
