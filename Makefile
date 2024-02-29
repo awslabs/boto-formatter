@@ -6,3 +6,7 @@ install:
 
 test:
 	python3 -m unittest discover -s tests/unittests -p "*.py"
+
+clean:
+	pip uninstall boto_formatter -y
+	rm -r ./dist
