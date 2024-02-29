@@ -1,5 +1,16 @@
+import unittest
+
 import boto3
+
 from boto_formatter.core_formatter import boto_response_formatter
+
+
+class TestS3(unittest.TestCase):
+    def test_list_buckets(self):
+        list_buckets_fmt()
+
+    def test_list_objects_v2(self):
+        list_objects_v2_fmt()
 
 
 @boto_response_formatter(
@@ -20,15 +31,9 @@ def list_buckets_fmt():
 )
 def list_objects_v2_fmt():
     client = boto3.client("s3")
+    bucket = client.list_buckets()["Buckets"][0].get("Name")
     paginator = client.get_paginator("list_objects_v2")
-    Bucket = ""
     result = []
-    for page in paginator.paginate(Bucket=Bucket):
+    for page in paginator.paginate(Bucket=bucket):
         result.append(page)
     return result
-
-
-if __name__ == "__main__":
-    # list_buckets_fmt()
-    list_buckets_fmt()
-    # list_objects_v2_fmt()

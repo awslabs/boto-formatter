@@ -1,46 +1,47 @@
 """
 This is general JSON utility
-
 """
+
 import datetime
-import os
 import json
 import logging
+import os
+
 logger = logging.getLogger()
 logger.setLevel(logging.ERROR)
 
 
 def flatten_json(y):
     """
-     Flatten JSON 
+     Flatten JSON
     :param json to be flatten
     :return: flattend json
     """
     output = {}
 
-    def flatten(x, name=''):
+    def flatten(x, name=""):
         if type(x) is dict:
             for a in x:
-                flatten(x[a], name + a + '_')
+                flatten(x[a], name + a + "_")
         elif type(x) is list:
             i = 0
             for a in x:
-                flatten(a, name + str(i) + '_')
+                flatten(a, name + str(i) + "_")
                 i += 1
         else:
             output[name[:-1]] = x
+
     flatten(y)
     return output
 
 
 def format_response_for_result_keys(json_object_list, result_keys):
     """
-    Iterate over result keys in JSON to get appropriate List
+     Iterate over result keys in JSON to get appropriate List
     :param json_object_list -JSON object which contains result_key(or Keys)
     :param result_keys  - List of Keys to be search in JSON
     :return: List of JSON objects
     """
-    """"""
     try:
         for result_key in result_keys:
             if len(json_object_list) > 0:
@@ -49,19 +50,20 @@ def format_response_for_result_keys(json_object_list, result_keys):
         # This is to handle when pagination iterate even though there is no record
         json_object_list = []
         logger.debug(err)
-        #logger.error(err)
-        #raise ValueError(
+        # logger.error(err)
+        # raise ValueError(
         #    "Result Keys {} not found in provided JSON. Decorator service/function is not matching with boto function".format(result_keys))
     except TypeError as err:
         logger.error(err)
         raise ValueError(
-            "Result List returned by boto3 function is not in correct format or decorator service/function is not matching with boto function")
+            "Result List returned by boto3 function is not in correct format or decorator service/function is not matching with boto function"
+        )
     return json_object_list
 
 
 def format_json_list(json_config, json_object_list, required_only, prefix_columns=None):
     """
-    Prior : 
+    Prior:
     Filter Result Keys
     Append addtional columns
     Compare all objects in JSON List with reference json(json_config) and generate list
@@ -103,16 +105,17 @@ def format_json_list(json_config, json_object_list, required_only, prefix_column
         # 6. Append Extra Cloumns as pipe seprated Key/Value
         # If required_only is selected don't need extra columns
         if not required_only:
-            extra_rows = [
-                i for i in json_object_keys if i not in keys_present_list]
+            extra_rows = [i for i in json_object_keys if i not in keys_present_list]
             for extra_row_key in extra_rows:
                 result_row[extra_row_key] = "{}|{}".format(
-                    extra_row_key, json_object[extra_row_key])
+                    extra_row_key, json_object[extra_row_key]
+                )
         # 7 None of key matches for first row raise and exception as it's not valid JSON
         if First_record:
             if len(keys_present_list) == 0:
                 raise ValueError(
-                    "Zero record keys are matching. Check the JSON result is appropriate format")
+                    "Zero record keys are matching. Check that the JSON result is in the appropriate format. "
+                )
         First_record = False
         result_json_list.append(result_row)
     return result_json_list
@@ -120,10 +123,10 @@ def format_json_list(json_config, json_object_list, required_only, prefix_column
 
 def format_str_list(json_config, json_object_list, required_only, prefix_columns=None):
     """
-    Prior : 
+    Prior:
     Filter Result Keys
     Append addtional columns
-     Iterate each string and convert to JSON 
+    Iterate each string and convert to JSON
 
     :param json_config -reference json
     :param json_object_list  - json list that need to be formatted
@@ -132,7 +135,7 @@ def format_str_list(json_config, json_object_list, required_only, prefix_columns
     :return: return json object list formatted in line with json_config
     """
     result_json_list = []
-    #Ensure first Key is present
+    # Ensure first Key is present
     column_key = list(json_config.keys())[0]
     # 1 Take each string in list
     # 1 Outer Loop
@@ -147,7 +150,6 @@ def format_str_list(json_config, json_object_list, required_only, prefix_columns
         result_row[column_key] = str_obj
         result_json_list.append(result_row)
     return result_json_list
-
 
 
 def format_json_object(json_config, json_object_raw):
@@ -175,26 +177,30 @@ def format_json_object(json_config, json_object_raw):
             keys_present_list.append(json_config_key)
         else:
             result_row[json_config_key] = ""
-    # 5. Append Extra Cloumns as pipe seprated Key/Value
+    # 5. Append Extra Cloumns as pipe separated Key/Value
     extra_rows = [i for i in json_object_keys if i not in keys_present_list]
     for extra_row_key in extra_rows:
         result_row[extra_row_key] = "{}|{}".format(
-            extra_row_key, json_object[extra_row_key])
+            extra_row_key, json_object[extra_row_key]
+        )
 
     return result_row
 
 
-def get_csv_data(result_json_list):
+def get_csv_data(result_json_list, separator=";"):
     """
-    :param flattend json object list
+    :param flattened json object list
     :return: list of comma seperated string
     """
     csv_data = []
     if len(result_json_list) > 0:
         logger.debug(result_json_list)
-        csv_data.append(",".join(result_json_list[0].keys()))
+        # CSV header
+        csv_data.append(separator.join(result_json_list[0].keys()))
+        # CSV data
         for json_obj in result_json_list:
-            csv_data.append(",".join(json_obj.values()))
+            csv_data.append(separator.join(json_obj.values()))
+            # csv_data.append(separator.join(map(str, json_obj.values())))
     return csv_data
 
 
@@ -226,7 +232,8 @@ def get_file_path(service_name, function_name, dir_path, file_type):
         ValueError("Invalid Path to store the file  {}".format(dir_path))
     current_date = datetime.datetime.now().strftime("%d_%m_%Y_%H_%M_%S")
     file_name = "{}_{}_{}.{}".format(
-        service_name, function_name, current_date, file_type)
+        service_name, function_name, current_date, file_type
+    )
     output_path = os.path.join(dir_path, "output")
     logger.info("Output directory path {} ".format(output_path))
     if not os.path.exists(output_path):
@@ -246,14 +253,13 @@ def save_csv(csv_data, service_name, function_name, dir_path):
     """
     file_full_path = None
     if len(csv_data) > 0:
-        file_full_path = get_file_path(
-            service_name, function_name, dir_path, "csv")
-        f = open(file_full_path, "w")
-        for row in csv_data:
-            f.write(row + "\n")
-        print("RESULT : File is generated at location {} ".format(file_full_path))
+        file_full_path = get_file_path(service_name, function_name, dir_path, "csv")
+        with open(file_full_path, "w") as f:
+            for row in csv_data:
+                f.write(row + "\n")
+        print(f"RESULT : File is generated at location {file_full_path} ")
     else:
-        print("RESULT : No records . ")
+        print("RESULT : No records.")
     return file_full_path
 
 
@@ -269,8 +275,7 @@ def save_json(json_data, service_name, function_name, dir_path=None):
     if len(json_data) > 0:
         json_data_list = dict()
         json_data_list["result"] = json_data
-        file_full_path = get_file_path(
-            service_name, function_name, dir_path, "json")
+        file_full_path = get_file_path(service_name, function_name, dir_path, "json")
         json_data_list = json.dumps(json_data_list, indent=4, default=str)
         # Writing to sample.json
         with open(file_full_path, "w") as outfile:
@@ -282,8 +287,7 @@ def save_json(json_data, service_name, function_name, dir_path=None):
 
 
 def save_file(json_data, service_name, function_name, dir_path=None):
-    file_full_path = get_file_path(
-        service_name, function_name, dir_path, "json")
+    file_full_path = get_file_path(service_name, function_name, dir_path, "json")
     # Writing to sample.json
     with open(file_full_path, "w") as outfile:
         outfile.write(json_data)

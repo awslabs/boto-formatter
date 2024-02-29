@@ -1,0 +1,36 @@
+{
+    "service_name": "appflow",
+    "functions": [
+        {
+            "function_name": "list_flows",
+            "function_description": "Returns a list of flows",
+            "boto_session_type": "client",
+            "response_format": "FORMAT_2",
+            "function_type": "list",
+            "is_regional": "Yes",
+            "pagination_support": "No",
+            "result_keys": [
+                "flows"
+            ],
+            "json_response": {
+                "flowArn": "string",
+                "description": "string",
+                "flowName": "string",
+                "flowStatus": "string",
+                "sourceConnectorType": "string",
+                "destinationConnectorType": "string",
+                "triggerType": "string",
+                "createdAt": "datetime",
+                "lastUpdatedAt": "datetime",
+                "createdBy": "string",
+                "lastUpdatedBy": "string",
+                "tags": "map",
+                "lastRunExecutionDetails": {
+                    "mostRecentExecutionMessage": "string",
+                    "mostRecentExecutionTime": "datetime",
+                    "mostRecentExecutionStatus": "string"
+                }
+            }
+        }
+    ]
+}
