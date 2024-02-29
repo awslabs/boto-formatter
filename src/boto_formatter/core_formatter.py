@@ -1,9 +1,9 @@
 import logging
-from sys import modules
 import os
+from sys import modules
+
 import boto_formatter.json_util.json_util as json_util
 from boto_formatter.service_config_mgr.service_config import ServiceConfig
-
 
 # Set up our logger
 logging.basicConfig(level=logging.ERROR)
@@ -220,9 +220,9 @@ def __ouput_to(
     elif output_to == "file" or output_to == "s3":
         if output_path is None:
             output_path = func_dir_path
-            logging.debug("Directory Path : {}".format(output_path))
+            logging.debug(f"Directory Path : {output_path}")
+        file_path = None
         if format_type:
-            file_path = None
             if format_type == "csv":
                 file_path = json_util.save_csv(
                     result, service_name, function_name, output_path
