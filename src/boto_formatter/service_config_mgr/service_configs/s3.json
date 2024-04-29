@@ -2,25 +2,187 @@
     "service_name": "s3",
     "functions": [
         {
-            "function_name": "create_bucket",
-            "function_description": "create bucket",
+            "function_name": "list_bucket_analytics_configurations",
+            "function_description": "Lists the analytics configurations for the bucket",
+            "response_format": "FORMAT_2",
+            "function_type": "list",
+            "is_regional": "N",
+            "pagination_support": "N",
+            "implclass": "_global_no_paginate",
+            "implfunction": "process",
+            "validation_functions": "",
+            "is_multi_account_support": "Y",
             "boto_session_type": "client",
-            "response_format": "FORMAT_1",
-            "function_type": "create",
-            "is_regional": "No",
-            "pagination_support": "No",
+            "pagination_attributes": [
+                {
+                    "attribute_name": "Bucket",
+                    "attribute_value": "",
+                    "is_visible": "Y",
+                    "display_prompt": "The name of the bucket",
+                    "type": "str"
+                }
+            ],
+            "result_keys": [
+                "AnalyticsConfigurationList"
+            ],
             "json_response": {
-                "Location": "string"
+                "Id": "",
+                "Filter_Prefix": "",
+                "Filter_Tag_Key": "",
+                "Filter_Tag_Value": "",
+                "Filter_And_Prefix": "",
+                "Filter_And_Tags_0_Key": "",
+                "Filter_And_Tags_0_Value": "",
+                "StorageClassAnalysis_DataExport_OutputSchemaVersion": "V_1",
+                "StorageClassAnalysis_DataExport_Destination_S3BucketDestination_Format": "",
+                "StorageClassAnalysis_DataExport_Destination_S3BucketDestination_BucketAccountId": "",
+                "StorageClassAnalysis_DataExport_Destination_S3BucketDestination_Bucket": "",
+                "StorageClassAnalysis_DataExport_Destination_S3BucketDestination_Prefix": ""
+            }
+        },
+        {
+            "function_name": "list_bucket_intelligent_tiering_configurations",
+            "function_description": "Lists the S3 Intelligent-Tiering configuration",
+            "response_format": "FORMAT_2",
+            "function_type": "list",
+            "is_regional": "N",
+            "pagination_support": "N",
+            "implclass": "_global_no_paginate",
+            "implfunction": "process",
+            "validation_functions": "",
+            "is_multi_account_support": "Y",
+            "boto_session_type": "client",
+            "pagination_attributes": [
+                {
+                    "attribute_name": "Bucket",
+                    "attribute_value": "",
+                    "is_visible": "Y",
+                    "display_prompt": "The name of the bucket",
+                    "type": "str"
+                }
+            ],
+            "result_keys": [
+                "IntelligentTieringConfigurationList"
+            ],
+            "json_response": {
+                "Id": "",
+                "Filter_Prefix": "",
+                "Filter_Tag_Key": "",
+                "Filter_Tag_Value": "",
+                "Filter_And_Prefix": "",
+                "Filter_And_Tags_0_Key": "",
+                "Filter_And_Tags_0_Value": "",
+                "Status": "",
+                "Tierings_0_Days": "",
+                "Tierings_0_AccessTier": ""
+            }
+        },
+        {
+            "function_name": "list_bucket_inventory_configurations",
+            "function_description": "Lists the S3 Inventory configuration",
+            "response_format": "FORMAT_2",
+            "function_type": "list",
+            "is_regional": "N",
+            "pagination_support": "N",
+            "implclass": "_global_no_paginate",
+            "implfunction": "process",
+            "validation_functions": "",
+            "is_multi_account_support": "Y",
+            "boto_session_type": "client",
+            "pagination_attributes": [
+                {
+                    "attribute_name": "Bucket",
+                    "attribute_value": "",
+                    "is_visible": "Y",
+                    "display_prompt": "The name of the bucket",
+                    "type": "str"
+                }
+            ],
+            "result_keys": [
+                "InventoryConfigurationList"
+            ],
+            "json_response": {
+                "Destination_S3BucketDestination_AccountId": "",
+                "Destination_S3BucketDestination_Bucket": "",
+                "Destination_S3BucketDestination_Format": "",
+                "Destination_S3BucketDestination_Prefix": "",
+                "Destination_S3BucketDestination_Encryption_SSEKMS_KeyId": "",
+                "IsEnabled": "",
+                "Filter_Prefix": "",
+                "Id": "",
+                "IncludedObjectVersions": "",
+                "OptionalFields_0": "",
+                "Schedule_Frequency": ""
+            }
+        },
+        {
+            "function_name": "list_bucket_metrics_configurations",
+            "function_description": "List Bucket Metrics Configurations",
+            "response_format": "FORMAT_2",
+            "function_type": "list",
+            "is_regional": "N",
+            "pagination_support": "N",
+            "implclass": "_global_no_paginate",
+            "implfunction": "process",
+            "validation_functions": "",
+            "is_multi_account_support": "Y",
+            "boto_session_type": "client",
+            "pagination_attributes": [
+                {
+                    "attribute_name": "Bucket",
+                    "attribute_value": "",
+                    "is_visible": "Y",
+                    "display_prompt": "The name of the bucket",
+                    "type": "str"
+                }
+            ],
+            "result_keys": [
+                "MetricsConfigurationList"
+            ],
+            "json_response": {
+                "Id": "string",
+                "Filter_Prefix": "string",
+                "Filter_Tag_Key": "string",
+                "Filter_Tag_Value": "string",
+                "Filter_AccessPointArn": "string",
+                "Filter_And_Prefix": "string",
+                "Filter_And_Tags_0_Key": "string",
+                "Filter_And_Tags_0_Value": "string",
+                "Filter_And_AccessPointArn": "string"
+            }
+        },
+        {
+            "function_name": "list_directory_buckets",
+            "function_description": "list_directory_buckets",
+            "response_format": "FORMAT_2",
+            "function_type": "list",
+            "is_regional": "N",
+            "pagination_support": "N",
+            "implclass": "_global_no_paginate",
+            "implfunction": "process",
+            "validation_functions": "",
+            "is_multi_account_support": "Y",
+            "boto_session_type": "client",
+            "result_keys": [
+                "Buckets"
+            ],
+            "json_response": {
+                "Name": "",
+                "CreationDate": ""
             }
         },
         {
             "function_name": "list_buckets",
-            "function_description": "list buckets",
+            "function_description": "List of S3 buckets",
             "boto_session_type": "client",
             "response_format": "FORMAT_2",
             "function_type": "list",
-            "is_regional": "Yes",
-            "pagination_support": "No",
+            "is_regional": "Y",
+            "pagination_support": "N",
+            "implclass": "_global_no_paginate",
+            "implfunction": "process",
+            "validation_functions": "",
+            "is_multi_account_support": "Y",
             "result_keys": [
                 "Buckets"
             ],
@@ -35,8 +197,12 @@
             "boto_session_type": "client",
             "response_format": "FORMAT_2",
             "function_type": "list",
-            "is_regional": "No",
-            "pagination_support": "No",
+            "is_regional": "N",
+            "pagination_support": "N",
+            "implclass": "Not Defined",
+            "implfunction": "Not Defined",
+            "validation_functions": "Not Defined",
+            "is_multi_account_support": "Not Defined",
             "result_keys": [
                 "Uploads"
             ],
@@ -57,8 +223,21 @@
             "boto_session_type": "client",
             "response_format": "FORMAT_2",
             "function_type": "list",
-            "is_regional": "No",
-            "pagination_support": "Yes",
+            "is_regional": "N",
+            "pagination_support": "Y",
+            "implclass": "_global_paginate",
+            "implfunction": "process",
+            "pagination_attributes": [
+                {
+                    "attribute_name": "Bucket",
+                    "attribute_value": "",
+                    "is_visible": "Y",
+                    "display_prompt": "The name of the bucket containing the objects",
+                    "type": "str"
+                }
+            ],
+            "validation_functions": "",
+            "is_multi_account_support": "N",
             "result_keys": [
                 "Contents"
             ],
