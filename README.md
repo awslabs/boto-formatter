@@ -1,8 +1,18 @@
 # boto_formatter
 ## What is boto _formatter?
-boto_response_formatter is decorator that convert standard boto3 function response (returned as python list) in flattened JSON or tabular CSV formats for [list of supported services and functions] (https://github.com/awslabs/boto-formatter/blob/main/docs/supported_services.md). You can output the response to print, file or send flattened columnar JSON list to another function to continue your process.
 
-boto_formatter simplifies the process and reduce the need of writing custom codebase potentially of 100s of line of code to 4-5 lines of code for simple use cases like generating list of lambda functions or list of cloudfront distriubtions with all the attributes that AWS Python SDK provides.
+The **boto_formatter(boto_magic_formatter)** is a tool that handles several common tasks when working with boto3 response data:
+1. It automatically handles pagination of AWS responses, 
+   stitching together data from multiple pages into a single output.
+2. It flattens out nested JSON structures into a consistent tabular format. 
+3. It allows you to output the processed data to a file, print it to standard out,
+   send it to another command, or upload it to S3 (TBD).
+4. It can convert the data to either csv or json format.
+In summary, the boto_magic_formatter takes care of pagination, flattening, 
+consistent output formatting, and output destination for AWS data, returning it as a csv or json file.
+
+
+ [list of supported services and functions] (https://github.com/awslabs/boto-formatter/blob/main/docs/supported_services.md). 
 
 ## How it works?
 You simply add decorator to your python function (The function which is returning   list from boto3 function) and it will convert the boto3 return list to flatten JSON or comma separate values (CSV). 
@@ -10,21 +20,25 @@ You simply add decorator to your python function (The function which is returnin
 <p align="center">
   <img src="imgs/boto_formatter.PNG"  title="boto_formatter">
 
-By adding  decorator **@boto_response_formatter** to a function as example shown below in  list_policies_fmt() function the response of the function will be converted to .csv . Generated csv response will also be saved in a file iam_list_polices_<date>.csv in a output folder located in the same directory of invoking python script. 
+By adding  decorator **@boto_magic_formatter** to a **generic function** as example shown below in  list_resources() function the response of the function will be converted to .csv . Generated csv response will also be saved in a file list_resources<date>.csv in a output folder located in the same directory of invoking python script. 
 You can also notice the difference in lines of code when using boto_formatter and without boto_formatter to achieve the same result of parsing and flattening the json response.
 
 ```
 import boto3
-from  boto_formatter.core_formatter import boto_response_formatter
+from boto_formatter.boto_magic_formatter import boto_magic_formatter
+"""
+Configuration options:
+1. format_type: Options are csv or json .Default is json
+2. output_to: Opitons are file or print or s3 : Default is None and just return flattend json
+3. file_name: Option is custom file name : Default is None
+4. Prefix_columns: Prepend static columns like AccountID to output
+"""
 
-# With boto_formatter
-@boto_response_formatter(service_name="iam", function_name="list_policies", format_type="csv", output_to="file" ,pagination="yes")
-def list_policies_fmt():
-    client = boto3.client('iam')
-    paginator = client.get_paginator('list_policies')
-    result = []
-    for page in paginator.paginate():
-        result.append(page)
+@boto_magic_formatter(format_type="csv")
+def list_resources(_session, service_name, function_name, result, attributes):
+    """
+    Place holder function. Decorator does all the magic.
+    """
     return result
 
 # Without boto_formatter
@@ -55,8 +69,14 @@ def list_policies_without_boto_formatter():
 
 		return result
 
-list_policies_fmt()
-list_policies_without_boto_formatter()
+
+if __name__ == "__main__":
+	list_policies_fmt()
+    _session = boto3.session.Session()
+    # just pass the service name and function name and generate the csv file
+    list_resources_to_file(_session, "iam", "list_policies", "")
+
+
 
 ```
 
@@ -87,17 +107,80 @@ Run boto-formatter code:
 
 ```
 import boto3
-from  boto_formatter.core_formatter import boto_response_formatter
+from boto_formatter.boto_magic_formatter import boto_magic_formatter
 
-# With boto_formatter
-@boto_response_formatter(service_name="iam", function_name="list_policies", format_type="csv", output_to="file" ,pagination="yes")
-def list_policies_fmt():
-    client = boto3.client('iam')
-    paginator = client.get_paginator('list_policies')
-    result = []
-    for page in paginator.paginate():
-        result.append(page)
+
+"""
+Configuration options:
+1. format_type: Specify "csv" or "json" format (default is json)
+2. output_to: Choose file, print/command, or S3 for output 
+3. file_name: For file output, specify a custom file name 
+4. Prefix_columns: Prepend static columns like AccountID to output
+"""
+@boto_magic_formatter(format_type="csv", output_to="file")
+def list_resources_to_file(_session, service_name, function_name, result, attributes):
+    """
+    Place holder function. Decorator does all the magic.
+    """
     return result
+
+
+"""
+Returns flatten JSON
+"""
+@boto_magic_formatter()
+def list_resources(_session, service_name, function_name, result, attributes):
+    """
+    Place holder function. Decorator does all the magic.
+    """
+    return result
+
+"""
+Save .csv file on S3 bucket
+"""
+@boto_magic_formatter(format_type="json", output_to="s3", s3_bucket="rajeabh-cdk-test")
+def list_resources_to_s3(_session, service_name, function_name, result, attributes):
+    """
+    Place holder function. Decorator does all the magic.
+    """
+    return result
+
+"""
+List all the supported services in boto_magic formatter
+"""
+def list_all_resoruces():
+    _session = boto3.session.Session()
+    service_function_list = list_configured_services()
+    for service in service_function_list:
+        service_name = service["service_name"]
+        function_list = service["function_list"]
+        for function_details in function_list:
+            # Check if function doesn't take any input like Bucket Name
+            print(function_details.keys())
+            if "pagination_attributes" in function_details.keys():
+                pass 
+            else:
+                print("Service :{} Function {} ".format(
+                    service_name, function_details["function_name"]))
+                print(list_resources(_session, service_name,
+                      function_details["function_name"], ""))
+
+
+
+if __name__ == "__main__":
+    _session = boto3.session.Session()
+    # just pass the service name and function name and generate the csv file
+    list_resources_to_file(_session, "accessanalyzer", "list_analyzers", "")
+    list_resources_to_file(_session, "s3", "list_buckets", "")
+    list_resources_to_file(_session, "lambda", "list_functions", "")
+    list_resources_to_file(_session, "iam", "list_roles", "")
+
+
+    list_resources_to_s3(_session, "s3", "list_buckets", "")
+
+    # If perticular function takes input you can pass input as a attribute like BucketName
+    attributes = {"Bucket" : "rajeabh-tiktok"}
+    list_resources_to_file(_session, "s3", "list_objects_v2", "",attributes)
 ```
 
 For building Installation from source code click [here](https://github.com/awslabs/boto-formatter/blob/main/docs/setup.md)
