@@ -23,6 +23,7 @@ if __name__ == "__main__":
     for resource in resource_list:
         try:
             attributes = {"Bucket": resource["Name"]}
+            print("Bucket : {}".format(resource["Name"]))
             #Step 2-A : Ingest prefix column for source bucket name
             prefix_columns = {"prefix_columns": {"SourceBucketName":resource["Name"]}}
              # Step 2-B : Get inventory configuration for each bucket and update the consolidated list.
