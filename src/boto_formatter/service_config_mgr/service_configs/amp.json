@@ -1,0 +1,61 @@
+{
+    "service_name": "amp",
+    "functions": [
+        {
+            "function_name": "list_scrapers",
+            "function_description": "PrometheusService :The ListScrapers operation lists all of the scrapers in your account",
+            "response_format": "FORMAT_2",
+            "function_type": "list",
+            "is_regional": "Y",
+            "pagination_support": "Y",
+            "implclass": "_regional_paginate",
+            "implfunction": "process",
+            "validation_functions": "",
+            "is_multi_account_support": "Y",
+            "boto_session_type": "client",
+            "result_keys": [
+                "scrapers"
+            ],
+            "json_response": {
+                "alias": "string",
+                "arn": "string",
+                "createdAt": "",
+                "destination_ampConfiguration_workspaceArn": "string",
+                "lastModifiedAt": "",
+                "roleArn": "",
+                "scraperId": "",
+                "source_eksConfiguration_clusterArn": "",
+                "source_eksConfiguration_securityGroupIds_0": "",
+                "source_eksConfiguration_subnetIds_0": "",
+                "status_statusCode": "",
+                "statusReason": "",
+                "tags_string": ""
+            }
+        },
+        {
+            "function_name": "list_workspaces",
+            "function_description": "Lists all of the Amazon Managed Service for Prometheus workspaces in your account",
+            "response_format": "FORMAT_2",
+            "function_type": "list",
+            "is_regional": "Y",
+            "pagination_support": "Y",
+            "implclass": "_regional_paginate",
+            "implfunction": "process",
+            "validation_functions": "",
+            "is_multi_account_support": "Y",
+            "boto_session_type": "client",
+            "result_keys": [
+                "workspaces"
+            ],
+            "json_response": {
+                "alias": "string",
+                "arn": "string",
+                "createdAt": "",
+                "kmsKeyArn": "string",
+                "status_statusCode": "",
+                "tags_string": "string",
+                "workspaceId": "string"
+            }
+        }
+    ]
+}

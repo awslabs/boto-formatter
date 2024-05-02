@@ -1,24 +1,24 @@
 {
-    "service_name": "kms",
+    "service_name": "account",
     "functions": [
         {
-            "function_name": "list_keys",
-            "function_description": "Gets a list of all KMS keys.",
-            "boto_session_type": "client",
+            "function_name": "list_regions",
+            "function_description": "list_regions",
             "response_format": "FORMAT_2",
             "function_type": "list",
             "is_regional": "Y",
             "pagination_support": "Y",
-            "is_multi_account_support": "Y",
             "implclass": "_regional_paginate",
             "implfunction": "process",
             "validation_functions": "",
+            "is_multi_account_support": "Y",
+            "boto_session_type": "client",
             "result_keys": [
-                "Keys"
+                "Regions"
             ],
             "json_response": {
-                "KeyId": "string",
-                "KeyArn": "string"
+                "RegionName": "",
+                "RegionOptStatus": ""
             }
         }
     ]

@@ -1,0 +1,124 @@
+{
+    "service_name": "sagemaker",
+    "functions": [
+        {
+            "function_name": "list_domains",
+            "function_description": "Lists the domains. ",
+            "boto_session_type": "client",
+            "response_format": "FORMAT_2",
+            "function_type": "list",
+            "is_regional": "Y",
+            "pagination_support": "Y",
+            "is_multi_account_support": "Y",
+            "implclass": "_regional_paginate",
+            "implfunction": "process",
+            "validation_functions": "",
+            "result_keys": [
+                "Domains"
+            ],
+            "json_response": {
+                "DomainArn": "string",
+                "DomainId": "string",
+                "DomainName": "string",
+                "Status": "",
+                "CreationTime": "",
+                "LastModifiedTime": "",
+                "Url": "string"
+            }
+        },
+        {
+            "function_name": "list_images",
+            "function_description": "Lists the Images. ",
+            "boto_session_type": "client",
+            "response_format": "FORMAT_2",
+            "function_type": "list",
+            "is_regional": "Y",
+            "pagination_support": "Y",
+            "is_multi_account_support": "Y",
+            "implclass": "_regional_paginate",
+            "implfunction": "process",
+            "validation_functions": "",
+            "result_keys": [
+                "Images"
+            ],
+            "json_response": {
+                "CreationTime": "",
+                "Description": "string",
+                "DisplayName": "string",
+                "FailureReason": "string",
+                "ImageArn": "string",
+                "ImageName": "string",
+                "ImageStatus": "",
+                "LastModifiedTime": ""
+            }
+        },
+        {
+            "function_name": "list_models",
+            "function_description": "Lists the Images. ",
+            "boto_session_type": "client",
+            "response_format": "FORMAT_2",
+            "function_type": "list",
+            "is_regional": "Y",
+            "pagination_support": "Y",
+            "is_multi_account_support": "Y",
+            "implclass": "_regional_paginate",
+            "implfunction": "process",
+            "validation_functions": "",
+            "result_keys": [
+                "Models"
+            ],
+            "json_response": {
+                "ModelName": "string",
+                "ModelArn": "string",
+                "CreationTime": ""
+            }
+        },
+        {
+            "function_name": "list_projects",
+            "function_description": "Lists the Projects. ",
+            "boto_session_type": "client",
+            "response_format": "FORMAT_2",
+            "function_type": "list",
+            "is_regional": "Y",
+            "pagination_support": "N",
+            "is_multi_account_support": "Y",
+            "implclass": "_regional_no_paginate",
+            "implfunction": "process",
+            "validation_functions": "",
+            "result_keys": [
+                "ProjectSummaryList"
+            ],
+            "json_response": {
+                "ProjectName": "string",
+                "ProjectDescription": "string",
+                "ProjectArn": "string",
+                "ProjectId": "string",
+                "CreationTime": "",
+                "ProjectStatus": ""
+            }
+        },
+        {
+            "function_name": "list_user_profiles",
+            "function_description": "Lists user profiles. ",
+            "boto_session_type": "client",
+            "response_format": "FORMAT_2",
+            "function_type": "list",
+            "is_regional": "Y",
+            "pagination_support": "Y",
+            "is_multi_account_support": "Y",
+            "implclass": "_regional_paginate",
+            "implfunction": "process",
+            "validation_functions": "",
+            "result_keys": [
+                "UserProfiles"
+            ],
+            "json_response": {
+                "DomainId": "string",
+                "UserProfileName": "string",
+                "Status": "",
+                "CreationTime": "",
+                "LastModifiedTime": ""
+            }
+        }
+    ]
+}

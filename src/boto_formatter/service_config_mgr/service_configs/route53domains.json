@@ -7,8 +7,12 @@
             "boto_session_type": "client",
             "response_format": "FORMAT_2",
             "function_type": "list",
-            "is_regional": "No",
-            "pagination_support": "Yes",
+            "is_regional": "N",
+            "pagination_support": "Y",
+            "is_multi_account_support": "Y",
+            "implclass": "_global_paginate",
+            "implfunction": "process",
+            "validation_functions": "",
             "result_keys": [
                 "Domains"
             ],
@@ -25,8 +29,12 @@
             "boto_session_type": "client",
             "response_format": "FORMAT_2",
             "function_type": "list",
-            "is_regional": "No",
-            "pagination_support": "Yes",
+            "is_regional": "N",
+            "pagination_support": "Y",
+            "is_multi_account_support": "Y",
+            "implclass": "_global_paginate",
+            "implfunction": "process",
+            "validation_functions": "",
             "result_keys": [
                 "Prices"
             ],

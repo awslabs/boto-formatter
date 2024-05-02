@@ -7,8 +7,12 @@
             "boto_session_type": "client",
             "response_format": "FORMAT_2",
             "function_type": "list",
-            "is_regional": "Yes",
-            "pagination_support": "Yes",
+            "is_regional": "Y",
+            "pagination_support": "Y",
+            "is_multi_account_support": "Y",
+            "implclass": "_regional_paginate",
+            "implfunction": "process",
+            "validation_functions": "",
             "result_keys": [
                 "applications"
             ],
@@ -31,8 +35,21 @@
             "boto_session_type": "client",
             "response_format": "FORMAT_2",
             "function_type": "list",
-            "is_regional": "Yes",
-            "pagination_support": "Yes",
+            "is_regional": "Y",
+            "pagination_support": "Y",
+            "is_multi_account_support": "Y",
+            "implclass": "_regional_paginate",
+            "implfunction": "process",
+            "validation_functions": "",
+            "pagination_attributes": [
+                {
+                    "attribute_name": "applicationId",
+                    "attribute_value": "",
+                    "is_visible": "Y",
+                    "display_prompt": "The ID of the application for which to list the job run",
+                    "type": "str"
+                }
+            ],
             "result_keys": [
                 "jobRuns"
             ],

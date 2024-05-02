@@ -1,0 +1,45 @@
+{
+    "service_name": "ssm",
+    "functions": [
+        {
+            "function_name": "describe_instance_information",
+            "function_description": "Describe Instance Information",
+            "boto_session_type": "client",
+            "response_format": "FORMAT_2",
+            "function_type": "list",
+            "is_regional": "Y",
+            "pagination_support": "Y",
+            "is_multi_account_support": "Y",
+            "implclass": "_regional_paginate",
+            "implfunction": "process",
+            "validation_functions": "",
+            "result_keys": [
+                "InstanceInformationList"
+            ],
+            "json_response": {
+                "InstanceId": "",
+                "PingStatus": "",
+                "LastPingDateTime": "",
+                "AgentVersion": "",
+                "IsLatestVersion": "",
+                "PlatformType": "",
+                "PlatformName": "",
+                "PlatformVersion": "",
+                "ActivationId": "",
+                "IamRole": "",
+                "RegistrationDate": "",
+                "ResourceType": "",
+                "Name": "",
+                "IPAddress": "",
+                "ComputerName": "",
+                "AssociationStatus": "",
+                "LastAssociationExecutionDate": "",
+                "LastSuccessfulAssociationExecutionDate": "",
+                "AssociationOverview_DetailedStatus": "",
+                "AssociationOverview_InstanceAssociationStatusAggregatedCount_": "",
+                "SourceId": "",
+                "SourceType": ""
+            }
+        }
+    ]
+}

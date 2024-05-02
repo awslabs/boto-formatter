@@ -7,19 +7,23 @@
             "boto_session_type": "client",
             "response_format": "FORMAT_2",
             "function_type": "list",
-            "is_regional": "No",
-            "pagination_support": "Yes",
+            "is_regional": "N",
+            "pagination_support": "Y",
+            "implclass": "_global_paginate",
+            "implfunction": "process",
+            "validation_functions": "",
+            "is_multi_account_support": "Y",
             "result_keys": [
                 "analyzers"
             ],
             "json_response": {
-                "arn": "string",
-                "name": "string",
-                "type": "",
-                "createdAt": "",
-                "lastResourceAnalyzed": "string",
+                "arn": "*",
+                "name": "*",
+                "type": "*",
+                "createdAt": "*",
+                "lastResourceAnalyzed": "",
                 "lastResourceAnalyzedAt": "",
-                "tags_string": "string",
+                "tags_string": "",
                 "status": "",
                 "statusReason_code": ""
             }
@@ -30,8 +34,21 @@
             "boto_session_type": "client",
             "response_format": "FORMAT_2",
             "function_type": "list",
-            "is_regional": "No",
-            "pagination_support": "Yes",
+            "is_regional": "N",
+            "pagination_support": "Y",
+            "is_multi_account_support": "Y",
+            "implclass": "_global_paginate",
+            "implfunction": "process",
+            "validation_functions": "",
+            "pagination_attributes": [
+                {
+                    "attribute_name": "analyzerArn",
+                    "attribute_value": "",
+                    "is_visible": "Y",
+                    "display_prompt": "The ARN of the analyzer to retrieve findings from",
+                    "type": "str"
+                }
+            ],
             "result_keys": [
                 "findings"
             ],
@@ -52,6 +69,43 @@
                 "sources_0_type": "",
                 "sources_0_detail_accessPointArn": "string",
                 "sources_0_detail_accessPointAccount": "string"
+            }
+        },
+        {
+            "function_name": "list_findings_v2",
+            "function_description": "list_findings_v2",
+            "response_format": "FORMAT_2",
+            "function_type": "list",
+            "is_regional": "N",
+            "pagination_support": "Y",
+            "implclass": "_global_paginate",
+            "implfunction": "process",
+            "validation_functions": "",
+            "is_multi_account_support": "Y",
+            "boto_session_type": "client",
+            "pagination_attributes": [
+                {
+                    "attribute_name": "analyzerArn",
+                    "attribute_value": "",
+                    "is_visible": "Y",
+                    "display_prompt": "The ARN of the analyzer to retrieve findings from",
+                    "type": "str"
+                }
+            ],
+            "result_keys": [
+                "analyzers"
+            ],
+            "json_response": {
+                "arn": "",
+                "name": "",
+                "type": "",
+                "createdAt": "",
+                "lastResourceAnalyzed": "",
+                "lastResourceAnalyzedAt": "",
+                "tags_string": "string",
+                "status": "",
+                "statusReason_code": "",
+                "configuration_unusedAccess_unusedAccessAge": ""
             }
         }
     ]

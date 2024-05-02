@@ -1,0 +1,39 @@
+{
+    "service_name": "resourcegroupstaggingapi",
+    "functions": [
+        {
+            "function_name": "get_resources",
+            "function_description": "Resources",
+            "boto_session_type": "client",
+            "response_format": "FORMAT_2",
+            "function_type": "list",
+            "is_regional": "Y",
+            "pagination_support": "Y",
+            "is_multi_account_support": "Y",
+            "implclass": "_regional_paginate",
+            "implfunction": "process",
+            "pagination_attributes": [
+                {
+                    "attribute_name": "Key",
+                    "attribute_value": "",
+                    "is_visible": "Y",
+                    "display_prompt": "Enter the Tag name",
+                    "type": "list",
+                    "parent_key": "TagFilters"
+                }
+            ],
+            "validation_functions": "",
+            "result_keys": [
+                "ResourceTagMappingList"
+            ],
+            "json_response": {
+                "ResourceARN": "",
+                "Tags_0_Key": "",
+                "Tags_0_Value": "",
+                "ComplianceDetails_NoncompliantKeys_0": "",
+                "ComplianceDetails_KeysWithNoncompliantValues_0": "",
+                "ComplianceDetails_ComplianceStatus": ""
+            }
+        }
+    ]
+}
