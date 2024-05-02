@@ -350,8 +350,8 @@ Place holder function configuration options:
 
 ## Expand the capabilities of the boto_formatter tool to enable more AWS services /boto3 functions.
 
-The boto_formatter configuration driven. There is a separate [<service_name>. json](https://github.com/awslabs/boto-formatter/tree/main/src/boto_formatter/service_config_mgr/service_configs) configuration file for each AWS service and it’s corresponding functions.
-These configuration files are also supported in [resource_lister](https://github.com/awslabs/resource-lister)
+The boto_formatter configuration driven. There is a separate <service_name>. json[Click Here](https://github.com/awslabs/boto-formatter/tree/main/src/boto_formatter/service_config_mgr/service_configs) configuration file for each AWS service and it’s corresponding functions.
+These configuration files are also supported in [awslabs/resource_lister](https://github.com/awslabs/resource-lister)
 
 **To add new service**: You simply create <new_service_name>. json file and update the corresponding configurations and **boto_formatter will automatically pickup the new service**.
 
