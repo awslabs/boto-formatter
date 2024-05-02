@@ -1,7 +1,7 @@
 # boto_formatter
-## What is boto _formatter?
+# What is boto _formatter?
 
-The **boto_formatter(boto_magic_formatter)** is a tool that handles several common tasks when working with boto3 response data:
+The boto_magic_formatter is a tool that handles several common tasks when working with boto3 response data:
 1. It automatically handles pagination of AWS responses, 
    stitching together data from multiple pages into a single output.
 2. It flattens out nested JSON structures into a consistent tabular format. 
@@ -11,35 +11,24 @@ The **boto_formatter(boto_magic_formatter)** is a tool that handles several comm
 In summary, the boto_magic_formatter takes care of pagination, flattening, 
 consistent output formatting, and output destination for AWS data, returning it as a csv or json file.
 
+[List of supported services and functions](#Supported-services-functions)
+# How it works?
+You simply add **@boto_magic_formatter** decorator to your placeholder python function and decorator will do all the magic . 
 
- [list of supported services and functions] (https://github.com/awslabs/boto-formatter/blob/main/docs/supported_services.md). 
 
-## How it works?
-You simply add decorator to your python function (The function which is returning   list from boto3 function) and it will convert the boto3 return list to flatten JSON or comma separate values (CSV). 
 
-<p align="center">
-  <img src="imgs/boto_formatter.PNG"  title="boto_formatter">
+The **@boto_magic_formatter** decorator can be added to a generic function like list_resources() to automatically convert the function's response to a .csv format. When used, the decorator will save the converted csv output to a file called list_resources<date>.csv in an output folder located in the same directory as the invoking python script. 
 
-By adding  decorator **@boto_magic_formatter** to a **generic function** as example shown below in  list_resources() function the response of the function will be converted to .csv . Generated csv response will also be saved in a file list_resources<date>.csv in a output folder located in the same directory of invoking python script. 
-You can also notice the difference in lines of code when using boto_formatter and without boto_formatter to achieve the same result of parsing and flattening the json response.
+Using the **@boto_magic_formatter** decorator reduces the amount of code needed to parse and flatten the consistent json response from the function without worrying about detail of boto3 function. Without the decorator, additional lines of code would be required to manually handle the json parsing,flattenign in consistent way and csv conversion that the decorator performs automatically.
+
+
+Below is example demonstrate the simplification of generating list of aws resources using  magic formatter.
+
+**Without magic formatter**
 
 ```
 import boto3
-from boto_formatter.boto_magic_formatter import boto_magic_formatter
-"""
-Configuration options:
-1. format_type: Options are csv or json .Default is json
-2. output_to: Opitons are file or print or s3 : Default is None and just return flattend json
-3. file_name: Option is custom file name : Default is None
-4. Prefix_columns: Prepend static columns like AccountID to output
-"""
 
-@boto_magic_formatter(format_type="csv")
-def list_resources(_session, service_name, function_name, result, attributes):
-    """
-    Place holder function. Decorator does all the magic.
-    """
-    return result
 
 # Without boto_formatter
 def list_policies_without_boto_formatter():
@@ -69,21 +58,36 @@ def list_policies_without_boto_formatter():
 
 		return result
 
+    def dummy_csv_save_function(result):
+        print(save_file)
 
 if __name__ == "__main__":
-	list_policies_fmt()
+    list_policies_without_boto_formatter()
+
+```
+**With boto_magic_formatter**
+Boto_magic formatter takes care of flattening the data, converting it to CSV format, managing pagination, and generating the output file, removing those burdens from the user.
+```
+import boto3
+from boto_formatter.boto_magic_formatter import boto_magic_formatter
+
+@boto_magic_formatter(format_type="csv", output_to="file")
+def list_resources_to_file(_session, service_name, function_name, **attributes):
+    result = None
+    return result
+
+if __name__ == "__main__":
     _session = boto3.session.Session()
-    # just pass the service name and function name and generate the csv file
-    list_resources_to_file(_session, "iam", "list_policies", "")
-
-
+    list_resources_to_file(_session, "iam", "list_policies")
 
 ```
 
+<p align="center">
+  <img src="imgs/boto_formatter.PNG"  title="boto_formatter">
 
-## Installation 
+# Installation 
 
-**boto-formatter** is distributed on PyPI. Easiest way to install it is with pip
+**boto-formatter** is distributed on PyPI. Easiest way to install it is with pip.For building Installation from source code click [here](https://github.com/awslabs/boto-formatter/blob/main/docs/setup.md)
 
 Create a virtual environment (optional):
 
@@ -103,6 +107,8 @@ pip install boto-formatter
 pip install boto3
 ```
 
+
+
 Run boto-formatter code:
 
 ```
@@ -118,370 +124,371 @@ Configuration options:
 4. Prefix_columns: Prepend static columns like AccountID to output
 """
 @boto_magic_formatter(format_type="csv", output_to="file")
-def list_resources_to_file(_session, service_name, function_name, result, attributes):
+def list_resources_to_file(_session, service_name, function_name, attributes):
     """
     Place holder function. Decorator does all the magic.
     """
+    result = None
     return result
-
-
-"""
-Returns flatten JSON
-"""
-@boto_magic_formatter()
-def list_resources(_session, service_name, function_name, result, attributes):
-    """
-    Place holder function. Decorator does all the magic.
-    """
-    return result
-
-"""
-Save .csv file on S3 bucket
-"""
-@boto_magic_formatter(format_type="json", output_to="s3", s3_bucket="rajeabh-cdk-test")
-def list_resources_to_s3(_session, service_name, function_name, result, attributes):
-    """
-    Place holder function. Decorator does all the magic.
-    """
-    return result
-
-"""
-List all the supported services in boto_magic formatter
-"""
-def list_all_resoruces():
-    _session = boto3.session.Session()
-    service_function_list = list_configured_services()
-    for service in service_function_list:
-        service_name = service["service_name"]
-        function_list = service["function_list"]
-        for function_details in function_list:
-            # Check if function doesn't take any input like Bucket Name
-            print(function_details.keys())
-            if "pagination_attributes" in function_details.keys():
-                pass 
-            else:
-                print("Service :{} Function {} ".format(
-                    service_name, function_details["function_name"]))
-                print(list_resources(_session, service_name,
-                      function_details["function_name"], ""))
 
 
 
 if __name__ == "__main__":
     _session = boto3.session.Session()
-    # just pass the service name and function name and generate the csv file
-    list_resources_to_file(_session, "accessanalyzer", "list_analyzers", "")
-    list_resources_to_file(_session, "s3", "list_buckets", "")
-    list_resources_to_file(_session, "lambda", "list_functions", "")
-    list_resources_to_file(_session, "iam", "list_roles", "")
+    list_resources_to_file(_session, "lambda", "list_functions")
 
-
-    list_resources_to_s3(_session, "s3", "list_buckets", "")
-
-    # If perticular function takes input you can pass input as a attribute like BucketName
-    attributes = {"Bucket" : "rajeabh-tiktok"}
-    list_resources_to_file(_session, "s3", "list_objects_v2", "",attributes)
 ```
 
-For building Installation from source code click [here](https://github.com/awslabs/boto-formatter/blob/main/docs/setup.md)
+# FAQ
 
-[Check Addtional examples here](https://github.com/awslabs/boto-formatter/blob/main/tests)
+## How can I find out which service names and functions ,attributes are available in the boto_magic_formatter library?
+**Option 1** : [List of supported services and functions](#Supported-services-functions)
 
-## Usage
-[Please click on each function to see the usage/example](https://github.com/awslabs/boto-formatter/blob/main/docs/supported_services.md)
+**Option2** :Generate a .csv file listing all the supported service names and function names that boto_magic_formatter supports, you can use the 
+function:generate_configured_services_file(). Code snippet Below -->
+```
+from boto_formatter.boto_magic_formatter import generate_configured_services_file
+if __name__ == "__main__":
+    generate_configured_services_file()
+```
 
-Click on service to see the usage 
-<table>
-<tbody>
-<tr>
-<th>Service</th>
-<th>Functions</th>
-</tr>
-<tr>
-<th>General usage</th>
-<th><a href="https://github.com/awslabs/boto-formatter/blob/main/tests/general_usage.py">General usage</a></th>
-</tr>
-<tr>
-<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/accessanalyzer_usage.py">accessanalyzer</a></td>
-<td>
-<ul>
-<li>1.list_analyzers</li>
-<li>2.list_findings</li>
-</ul>
-</td>
-</tr>
-<tr>
-<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/apigateway_usage.py">apigateway</a></td>
-<td>
-<ul>
-<li>3.get_rest_apis</li>
-</ul>
-</td>
-</tr>
-<tr>
-<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/budgets_usage.py">budgets</a></td>
-<td>
-<ul>
-<li>4.describe_budgets</li>
-</ul>
-</td>
-</tr>
-<tr>
-<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/cloudfront_usage.py">cloudfront</a></td>
-<td>
-<ul>
-<li>5.list_distributions</li>
-<li>6.list_functions</li>
-</ul>
-</td>
-</tr>
-<tr>
-<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/cloudtrail_usage.py">cloudtrail</a></td>
-<td>
-<ul>
-<li>7.list_trails</li>
-</ul>
-</td>
-</tr>
-<tr>
-<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/cloudwatch_usage.py">cloudwatch</a></td>
-<td>
-<ul>
-<li>8.list_dashboards</li>
-<li>9.list_metrics</li>
-</ul>
-</td>
-</tr>
-<tr>
-<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/codecommit_usage.py">codecommit</a></td>
-<td>
-<ul>
-<li>10.list_repositories</li>
-</ul>
-</td>
-</tr>
-<tr>
-<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/dynamodb_usage.py">dynamodb</a></td>
-<td>
-<ul>
-<li>11.list_tables</li>
-</ul>
-</td>
-</tr>
-<tr>
-<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/ec2_usage.py">ec2</a></td>
-<td>
-<ul>
-<li>12.describe_addresses</li>
-<li>13.describe_flow_logs</li>
-<li>14.describe_instances</li>
-<li>15.describe_network_acls</li>
-<li>16.describe_route_tables</li>
-<li>17.describe_security_groups</li>
-<li>18.describe_security_group_rules</li>
-<li>19.describe_snapshots</li>
-<li>20.describe_subnets</li>
-<li>21.describe_transit_gateways</li>
-<li>22.describe_volumes</li>
-<li>23.describe_vpcs</li>
-<li>24.describe_vpc_endpoints</li>
-<li>25.describe_vpc_peering_connections</li>
-<li>26.describe_vpn_connections</li>
-</ul>
-</td>
-</tr>
-<tr>
-<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/ecs_usage.py">ecs</a></td>
-<td>
-<ul>
-<li>27.list_clusters</li>
-<li>28.list_services</li>
-<li>29.list_tasks</li>
-</ul>
-</td>
-</tr>
-<tr>
-<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/efs_usage.py">efs</a></td>
-<td>
-<ul>
-<li>30.describe_file_systems</li>
-</ul>
-</td>
-</tr>
-<tr>
-<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/eks_usage.py">eks</a></td>
-<td>
-<ul>
-<li>31.describe_cluster</li>
-<li>32.list_clusters</li>
-<li>33.list_fargate_profiles</li>
-</ul>
-</td>
-</tr>
-<tr>
-<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/elasticache_usage.py">elasticache</a></td>
-<td>
-<ul>
-<li>34.describe_cache_clusters</li>
-</ul>
-</td>
-</tr>
-<tr>
-<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/elbv2_usage.py">elbv2</a></td>
-<td>
-<ul>
-<li>35.describe_load_balancers</li>
-</ul>
-</td>
-</tr>
-<tr>
-<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/emr-serverless_usage.py">emr-serverless</a></td>
-<td>
-<ul>
-<li>36.list_applications</li>
-<li>37.list_job_runs</li>
-</ul>
-</td>
-</tr>
-<tr>
-<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/emr_usage.py">emr</a></td>
-<td>
-<ul>
-<li>38.list_clusters</li>
-<li>39.list_instance_fleets</li>
-<li>40.list_notebook_executions</li>
-<li>41.list_studios</li>
-</ul>
-</td>
-</tr>
-<tr>
-<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/iam_usage.py">iam</a></td>
-<td>
-<ul>
-<li>42.list_users</li>
-<li>43.list_access_keys</li>
-<li>44.list_account_aliases</li>
-<li>45.list_attached_group_policies</li>
-<li>46.list_attached_role_policies</li>
-<li>47.list_attached_user_policies</li>
-<li>48.list_group_policies</li>
-<li>49.list_groups</li>
-<li>50.list_policies</li>
-<li>51.list_roles</li>
-</ul>
-</td>
-</tr>
-<tr>
-<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/kms_usage.py">kms</a></td>
-<td>
-<ul>
-<li>52.list_keys</li>
-</ul>
-</td>
-</tr>
-<tr>
-<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/lambda_usage.py">lambda</a></td>
-<td>
-<ul>
-<li>53.list_functions</li>
-<li>54.list_layers</li>
-</ul>
-</td>
-</tr>
-<tr>
-<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/organizations_usage.py">organizations</a></td>
-<td>
-<ul>
-<li>55.list_accounts</li>
-<li>56.list_policies</li>
-</ul>
-</td>
-</tr>
-<tr>
-<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/rds_usage.py">rds</a></td>
-<td>
-<ul>
-<li>57.describe_db_clusters</li>
-<li>58.describe_db_instances</li>
-<li>59.describe_db_security_groups</li>
-<li>60.describe_db_snapshots</li>
-<li>61.describe_global_clusters</li>
-</ul>
-</td>
-</tr>
-<tr>
-<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/redshift-serverless_usage.py">redshift-serverless</a></td>
-<td>
-<ul>
-<li>62.list_namespaces</li>
-<li>63.list_workgroups</li>
-</ul>
-</td>
-</tr>
-<tr>
-<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/redshift_usage.py">redshift</a></td>
-<td>
-<ul>
-<li>64.describe_clusters</li>
-</ul>
-</td>
-</tr>
-<tr>
-<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/route53_usage.py">route53</a></td>
-<td>
-<ul>
-<li>65.list_cidr_blocks</li>
-<li>66.list_hosted_zones</li>
-<li>67.list_hosted_zones_by_vpc</li>
-<li>68.list_vpc_association_authorizations</li>
-</ul>
-</td>
-</tr>
-<tr>
-<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/route53domains_usage.py">route53domains</a></td>
-<td>
-<ul>
-<li>69.list_domains</li>
-<li>70.list_prices</li>
-</ul>
-</td>
-</tr>
-<tr>
-<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/s3_usage.py">s3</a></td>
-<td>
-<ul>
-<li>71.create_bucket</li>
-<li>72.list_buckets</li>
-<li>73.list_multipart_uploads</li>
-<li>74.list_objects_v2</li>
-</ul>
-</td>
-</tr>
-<tr>
-<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/sns_usage.py">sns</a></td>
-<td>
-<ul>
-<li>75.list_subscriptions</li>
-<li>76.list_topics</li>
-</ul>
-</td>
-</tr>
-<tr>
-<td> <a href="https://github.com/awslabs/boto-formatter/blob/main/tests/sqs_usage.py">sqs</a></td>
-<td>
-<ul>
-<li>77.list_queues</li>
-</ul>
-</td>
-</tr>
-</tbody>
-<table>
 
+
+
+
+## Passing **attributes
+**When calling functions for use cases like listing S3 bucket objects or EMR cluster instance fleets, identifying attributes need to be passed in. For example, to retrieve a list of objects in an S3 bucket, you would pass the specific bucket name. And to get instance fleets for an EMR cluster, you would pass the cluster ID. You can pass identifying attributes to the function**
+
+**Code snippet Below -->**
+```
+import boto3
+from boto_formatter.boto_magic_formatter import boto_magic_formatter
+
+@boto_magic_formatter(format_type="csv", output_to="file")
+def list_resources_to_file(_session, service_name, function_name, **attributes):
+    result = None
+    return result
+
+if __name__ == "__main__":
+    _session = boto3.session.Session()
+    # If perticular function takes input you can pass input as a attribute like BucketName
+    attributes = {"Bucket" : "abhi-abc-bucket"}
+    list_resources_to_file(_session, "s3", "list_objects_v2", attributes=attributes)
+    attributes = {"ClusterId" : "abc"}
+    list_resources_to_file(_session, "emr", "list_instance_fleets", attributes=attributes)
+
+```
+
+
+
+## Usage of attributes output chaining and prefix_columns .
+**For example usecase of identify all S3 buckets with inventory settings enabled, you first need to retrieve a list of all S3 buckets. Then, for each bucket, check if inventory configuration is enabled. You also need to store the source bucket name with the inventory configuration result for reference. Function chaining can be utilized to perform these actions sequentially, while prefix_columns allows appending supplemental columns to the output that indicate the source bucket for each record returned.**
+
+**Code snippet Below -->**
+
+```
+import boto3
+from boto_formatter.boto_magic_formatter import boto_magic_formatter
+from boto_formatter.boto_magic_formatter import boto_magic_save_file
+
+# Generic function returns the flattend JSON list
+@boto_magic_formatter()
+def list_resources(_session, service_name, function_name, **kwargs):
+    result = None
+    return result
+
+# Boto magic utility function to save the file.
+@boto_magic_save_file(format_type="csv",file_name ="list_bucket_inventory_configurations")
+def save_file(result):
+    return result
+
+if __name__ == "__main__":
+    #list_bucket_analytics_configurations()
+    _session = boto3.session.Session()
+    # Step 1 : Get List of buckets
+    resource_list = list_resources(_session, "s3", "list_buckets")
+    consolidated_list = []
+    # Step 2 : Iterate over each bucket and get the inventory configurations
+    for resource in resource_list:
+        try:
+            attributes = {"Bucket": resource["Name"]}
+            print("Bucket : {}".format(resource["Name"]))
+            #Step 2-A : Ingest prefix column for source bucket name
+            prefix_columns = {"prefix_columns": {"SourceBucketName":resource["Name"]}}
+             # Step 2-B : Get inventory configuration for each bucket and update the consolidated list.
+            consolidated_list.extend(list_resources(_session, "s3", "list_bucket_inventory_configurations", attributes=attributes, prefix_columns=prefix_columns))
+        except Exception as e:
+            print(e)
+            pass
+    #Step 3  : Save consolidate file
+    save_file(consolidated_list)
+```
+
+## Example : Upload the created list to the specified S3 bucket.
+
+**Code snippet Below -->**
+
+```
+import boto3
+from boto_formatter.boto_magic_formatter import boto_magic_formatter
+@boto_magic_formatter(format_type="json", output_to="s3", s3_bucket="test-bucket")
+def list_resources_to_s3(_session, service_name, function_name, **kwargs):
+    result = None
+    return result
+
+if __name__ == "__main__":
+    _session = boto3.session.Session()
+    list_resources_to_s3(_session, "lambda", "list_functions")
+```
+
+
+## Example : Use the boto_formatter library to retrieve a list of all available resources that are supported.
+**Code snippet Below -->**
+
+```
+import boto3
+from boto_formatter.boto_magic_formatter import get_configured_services
+from boto_formatter.boto_magic_formatter import boto_magic_formatter
+
+
+@boto_magic_formatter(format_type="csv", output_to="file")
+def list_resources(_session, service_name, function_name):
+    result = None
+    return result
+
+
+def list_all_resoruces():
+    _session = boto3.session.Session()
+    service_function_list = get_configured_services()
+    for service in service_function_list:
+        service_name = service["service_name"]
+        function_list = service["function_list"]
+        for function_details in function_list:
+            # Check if function doesn't take any input like Bucket Name
+            if "pagination_attributes" in function_details.keys():
+                pass 
+            else:
+                print("Service :{} Function {} ".format(
+                    service_name, function_details["function_name"]))
+                list_resources(_session, service_name, function_details["function_name"])
+
+
+if __name__ == "__main__":
+    list_all_resoruces()
+
+```
+
+
+## Example : Use the boto_formatter library to retrieve a list of lambda functions across regions
+**Code snippet Below -->**
+
+```
+import boto3
+from boto_formatter.boto_magic_formatter import boto_magic_formatter
+from boto_formatter.boto_magic_formatter import boto_magic_save_file
+
+@boto_magic_formatter()
+def list_resources(_session, service_name, function_name):
+    result = None
+    return result
+
+
+# Boto magic utility function to save the file.
+@boto_magic_save_file(format_type="csv",file_name ="list_of_all_lambda_functions")
+def save_file(result):
+    return result
+
+if __name__ == "__main__":
+    consolidated_list = []
+    _session = boto3.session.Session()
+    region_list = list_resources(_session, "account", "list_regions")
+    for region in region_list:
+        if region["RegionOptStatus"]=='ENABLED' or region["RegionOptStatus"]=='ENABLED_BY_DEFAULT':
+         
+            region_name = region["RegionName"]
+            _session = boto3.session.Session(region_name = region_name)
+            prefix_columns = {"prefix_columns": {"region":region_name}}
+            print("For region {}".format(region_name))
+            consolidated_list.extend(list_resources(_session, "lambda", "list_functions", prefix_columns=prefix_columns))
+
+    save_file(consolidated_list)
+```
+## Use of boto_magic_response_formatter function instead Decorator
+**Code snippet Below -->**
+
+```
+import boto3
+from boto_formatter.boto_magic_formatter import boto_magic_response_formatter
+
+if __name__ == "__main__":
+    _session = boto3.session.Session()
+    boto_magic_response_formatter(_session, "account", "list_regions",format_type="csv",output_to="file")
+    boto_magic_response_formatter(_session, "lambda", "list_functions",format_type="csv",output_to="file")
+
+```
+
+
+
+
+## Configuration options for the boto_magic_formatter decorator and placeholder Python function.
+
+boto_magic_formatter Decorator configuration options:
+1. format_type: Options are --> csv|json Defaut is json.
+2. output_to: Options are --> print|cmd|s3 . Default is None. 
+3. file_name: Options are --> file_name in string format. Default is system generated.
+4. s3_bucket: Options are --> S3 Bucket Name in string format. Default is None. This is required only 
+when you want to save the file in S3 Bucket
+5. s3_bucket_prefix Options are --> S3 Bucket Prefix in string format. Default is None
+
+Place holder function configuration options:
+1. _session: boto3 session (Mandatory).
+2. service_name: boto3 service name (Mandatory). 
+3. function_name: boto3 function_name (Mandatory)
+4. attributes: Optional in a format attributes = {"<attribute_name>" : "<attribute_value>"}
+5. prefix_columns: Optional in a format {"prefix_columns": {"<cloumn_name>":"<cloumn_value>"}}
+
+## Expand the capabilities of the boto_formatter tool to enable more AWS services /boto3 functions.
+
+The boto_formatter configuration driven. There is a separate [<service_name>. json](https://github.com/awslabs/boto-formatter/tree/main/src/boto_formatter/service_config_mgr/service_configs) configuration file for each AWS service and it’s corresponding functions.
+These configuration files are also supported in [resource_lister](https://github.com/awslabs/resource-lister)
+
+**To add new service**: You simply create <new_service_name>. json file and update the corresponding configurations and **boto_formatter will automatically pickup the new service**.
+
+**To modify existing service**: You open the <existing_service_name>. json and update the corresponding configurations and boto_formatter will automatically pickup the new service.
+
+**To add or modify functions**: You open the <existing_service_name>. json and update the corresponding configurations and boto_formatter will automatically pickup the new service.
+
+
+**Step-by-step instructions for how to create a configuration file will be provided shortly**
+
+## Previous version : boto_core_formatter usage.
+
+Previous version is still supported you can use boto_response_formatter
+```
+import boto3
+from  boto_formatter.core_formatter import boto_response_formatter
+
+# With boto_formatter
+@boto_response_formatter(service_name="iam", function_name="list_policies", format_type="csv", output_to="file" ,pagination="yes")
+def list_policies_fmt():
+    client = boto3.client('iam')
+    paginator = client.get_paginator('list_policies')
+    result = []
+    for page in paginator.paginate():
+        result.append(page)
+    return result
+```
+[Check previous version examples here](https://github.com/awslabs/boto-formatter/blob/main/tests/core_formatter_usages)
+
+
+
+
+
+
+# Supported-services-functions
+
+|service_name            |function_name                                 |function_description                                                                                                                                                                               |mandatory_attributes|optional_attributes     |
+|------------------------|----------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------|------------------------|
+|accessanalyzer          |list_analyzers                                |Retrieves a list of analyzers.                                                                                                                                                                     |                    |                        |
+|accessanalyzer          |list_findings                                 |Returns information about the access key IDs associated with the specified IAM user                                                                                                                |analyzerArn         |                        |
+|accessanalyzer          |list_findings_v2                              |list_findings_v2                                                                                                                                                                                   |analyzerArn         |                        |
+|account                 |list_regions                                  |list_regions                                                                                                                                                                                       |                    |                        |
+|acm                     |list_certificates                             |Retrieves a list of certificate ARNs and domain names                                                                                                                                              |                    |                        |
+|amp                     |list_scrapers                                 |PrometheusService :The ListScrapers operation lists all of the scrapers in your account                                                                                                            |                    |                        |
+|amp                     |list_workspaces                               |Lists all of the Amazon Managed Service for Prometheus workspaces in your account                                                                                                                  |                    |                        |
+|apigateway              |get_rest_apis                                 |List All Rest APIs                                                                                                                                                                                 |                    |                        |
+|budgets                 |describe_budgets                              |Lists all the buedgets                                                                                                                                                                             |                    |AccountId               |
+|cleanrooms              |list_collaborations                           |Lists collaborations the caller owns is active in or has been invited to.                                                                                                                          |                    |                        |
+|cloudformation          |list_stacks                                   |List of Clouformation Stacks                                                                                                                                                                       |                    |                        |
+|cloudformation          |list_stack_sets                               |stack sets that are associated                                                                                                                                                                     |                    |                        |
+|cloudfront              |list_distributions                            |List CloudFront distributions                                                                                                                                                                      |                    |                        |
+|cloudfront              |list_functions                                |Gets a list of all CloudFront functions in your Amazon Web Services account                                                                                                                        |                    |                        |
+|cloudtrail              |list_trails                                   |Lists trails                                                                                                                                                                                       |                    |                        |
+|cloudwatch              |list_dashboards                               |List of the dashboards for your account                                                                                                                                                            |                    |                        |
+|cloudwatch              |list_metrics                                  |List the specified metrics                                                                                                                                                                         |                    |                        |
+|codecommit              |list_repositories                             |Gets information about one or more repositories.                                                                                                                                                   |                    |                        |
+|dynamodb                |list_tables                                   |Returns a list of tables                                                                                                                                                                           |                    |                        |
+|ec2                     |describe_addresses                            |Describes the specified Elastic IP addresses                                                                                                                                                       |                    |                        |
+|ec2                     |describe_flow_logs                            |List VPCFlow logs                                                                                                                                                                                  |                    |                        |
+|ec2                     |describe_instances                            |List All Ec2 instances                                                                                                                                                                             |                    |                        |
+|ec2                     |describe_network_acls                         |Descirbe Network ACL                                                                                                                                                                               |                    |                        |
+|ec2                     |describe_route_tables                         |Descirbe Route Tables                                                                                                                                                                              |                    |                        |
+|ec2                     |describe_security_groups                      |List All Security Groups                                                                                                                                                                           |                    |                        |
+|ec2                     |describe_security_group_rules                 |List All Security Groups Rules                                                                                                                                                                     |                    |                        |
+|ec2                     |describe_snapshots                            |Describe Snapshot                                                                                                                                                                                  |                    |OwnerIds                |
+|ec2                     |describe_subnets                              |Descirbe Route Tables                                                                                                                                                                              |                    |                        |
+|ec2                     |describe_transit_gateways                     |List All transit_gateways                                                                                                                                                                          |                    |                        |
+|ec2                     |describe_volumes                              |Descirbe Volumes                                                                                                                                                                                   |                    |                        |
+|ec2                     |describe_vpcs                                 |Descirbe VPCs                                                                                                                                                                                      |                    |                        |
+|ec2                     |describe_vpc_endpoints                        |List VPC endpoints                                                                                                                                                                                 |                    |                        |
+|ec2                     |describe_vpc_peering_connections              |List vpc peering connections Snapshot                                                                                                                                                              |                    |                        |
+|ec2                     |describe_vpn_connections                      |List VPCFlow logs                                                                                                                                                                                  |                    |                        |
+|ecs                     |list_clusters                                 |List ECS Clusters                                                                                                                                                                                  |                    |                        |
+|ecs                     |list_services                                 |List ECS services                                                                                                                                                                                  |cluster             |                        |
+|ecs                     |list_tasks                                    |list_tasks                                                                                                                                                                                         |cluster             |                        |
+|efs                     |describe_file_systems                         |Returns the description of a specific Amazon EFS file system                                                                                                                                       |                    |                        |
+|eks                     |describe_cluster                              |List EKS Clusters                                                                                                                                                                                  |name                |                        |
+|eks                     |list_clusters                                 |List EKS Clusters                                                                                                                                                                                  |                    |                        |
+|eks                     |list_fargate_profiles                         |List Farget profiles                                                                                                                                                                               |clusterName         |                        |
+|elasticache             |describe_cache_clusters                       |Provisioned cluster                                                                                                                                                                                |                    |                        |
+|elbv2                   |describe_load_balancers                       |All of your load balancers.                                                                                                                                                                        |                    |                        |
+|emr-serverless          |list_applications                             |Lists applications                                                                                                                                                                                 |                    |                        |
+|emr-serverless          |list_job_runs                                 |Lists job runs                                                                                                                                                                                     |applicationId       |                        |
+|emr                     |list_clusters                                 |List Clusters                                                                                                                                                                                      |                    |                        |
+|emr                     |list_instance_fleets                          |List Instance fleets of EMR Cluster                                                                                                                                                                |ClusterId           |                        |
+|emr                     |list_notebook_executions                      |List Notebook executions                                                                                                                                                                           |                    |                        |
+|emr                     |list_studios                                  |List Studios                                                                                                                                                                                       |                    |                        |
+|iam                     |list_users                                    |Lists the IAM users                                                                                                                                                                                |                    |                        |
+|iam                     |list_access_keys                              |Returns information about the access key IDs associated with the specified IAM user                                                                                                                |                    |                        |
+|iam                     |list_account_aliases                          |Lists the account alias associated with the Amazon Web Services account                                                                                                                            |                    |                        |
+|iam                     |list_attached_group_policies                  |Lists all managed policies that are attached to the specified IAM group                                                                                                                            |GroupName           |                        |
+|iam                     |list_attached_role_policies                   |Lists all managed policies that are attached to the specified IAM role                                                                                                                             |RoleName            |                        |
+|iam                     |list_attached_user_policies                   |Lists all managed policies that are attached to the specified IAM role                                                                                                                             |UserName            |                        |
+|iam                     |list_group_policies                           |Lists all managed policies that are attached to the specified IAM role                                                                                                                             |GroupName           |                        |
+|iam                     |list_groups                                   |Lists all managed policies that are attached to the specified IAM role                                                                                                                             |                    |                        |
+|iam                     |list_policies                                 |List All the IAM Polices                                                                                                                                                                           |                    |                        |
+|iam                     |list_roles                                    |Roles                                                                                                                                                                                              |                    |                        |
+|kms                     |list_keys                                     |Gets a list of all KMS keys.                                                                                                                                                                       |                    |                        |
+|lambda                  |list_functions                                |List Lambda Functions                                                                                                                                                                              |                    |                        |
+|lambda                  |list_layers                                   |List Layers                                                                                                                                                                                        |                    |                        |
+|organizations           |list_accounts                                 |List accounts in Organization                                                                                                                                                                      |                    |                        |
+|organizations           |list_policies                                 |List Policies in  Organization                                                                                                                                                                     |                    |Filter                  |
+|rds                     |describe_db_clusters                          |Amazon Aurora DB clusters                                                                                                                                                                          |                    |                        |
+|rds                     |describe_db_instances                         |Provisioned RDS instances                                                                                                                                                                          |                    |                        |
+|rds                     |describe_db_security_groups                   |Returns a list of DBSecurityGroup descriptions                                                                                                                                                     |                    |                        |
+|rds                     |describe_db_snapshots                         |Returns information about DB snapshots.                                                                                                                                                            |                    |                        |
+|rds                     |describe_global_clusters                      |Aurora global database clusters                                                                                                                                                                    |                    |                        |
+|redshift-serverless     |list_namespaces                               |List Name spaces                                                                                                                                                                                   |                    |                        |
+|redshift-serverless     |list_workgroups                               |List work groups                                                                                                                                                                                   |                    |                        |
+|redshift                |describe_clusters                             |Amazon Redshift returns all clusters                                                                                                                                                               |                    |                        |
+|resourcegroupstaggingapi|get_resources                                 |Resources                                                                                                                                                                                          |Key                 |                        |
+|route53                 |list_cidr_blocks                              |Returns a paginated list of CIDR collections in the Amazon Web Services account (metadata only)                                                                                                    |CollectionId        |                        |
+|route53                 |list_hosted_zones                             |Retrieves a list of the public and private hosted zones that are associated with the current Amazon Web Services account                                                                           |                    |                        |
+|route53                 |list_hosted_zones_by_vpc                      |Retrieves a list of the public and private hosted zones that are associated with the current Amazon Web Services account                                                                           |VPCId               |                        |
+|route53                 |list_vpc_association_authorizations           |Gets a list of the VPCs that were created by other accounts and that can be associated with a specified hosted zone because youve submitted one or more CreateVPCAssociationAuthorization requests.|HostedZoneId        |                        |
+|route53domains          |list_domains                                  |Domain names registered with Amazon Route 53                                                                                                                                                       |                    |                        |
+|route53domains          |list_prices                                   |Lists the following prices for either all the TLDs supported by Route 53                                                                                                                           |                    |                        |
+|s3                      |list_bucket_analytics_configurations          |Lists the analytics configurations for the bucket                                                                                                                                                  |Bucket              |                        |
+|s3                      |list_bucket_intelligent_tiering_configurations|Lists the S3 Intelligent-Tiering configuration                                                                                                                                                     |Bucket              |                        |
+|s3                      |list_bucket_inventory_configurations          |Lists the S3 Inventory configuration                                                                                                                                                               |Bucket              |                        |
+|s3                      |list_bucket_metrics_configurations            |List Bucket Metrics Configurations                                                                                                                                                                 |Bucket              |                        |
+|s3                      |list_directory_buckets                        |list_directory_buckets                                                                                                                                                                             |                    |                        |
+|s3                      |list_buckets                                  |List of S3 buckets                                                                                                                                                                                 |                    |                        |
+|s3                      |list_multipart_uploads                        |list buckets                                                                                                                                                                                       |Bucket              |                        |
+|s3                      |list_objects_v2                               |List Objects                                                                                                                                                                                       |Bucket              |                        |
+|sagemaker               |list_domains                                  |Lists the domains.                                                                                                                                                                                 |                    |                        |
+|sagemaker               |list_images                                   |Lists the Images.                                                                                                                                                                                  |                    |                        |
+|sagemaker               |list_models                                   |Lists the Images.                                                                                                                                                                                  |                    |                        |
+|sagemaker               |list_projects                                 |Lists the Projects.                                                                                                                                                                                |                    |                        |
+|sagemaker               |list_user_profiles                            |Lists user profiles.                                                                                                                                                                               |                    |                        |
+|sns                     |list_subscriptions                            |List subscriptions                                                                                                                                                                                 |                    |                        |
+|sns                     |list_topics                                   |Returns a list of topics                                                                                                                                                                           |                    |                        |
+|sqs                     |list_queues                                   |Returns a list of queues                                                                                                                                                                           |                    |                        |
+|ssm                     |describe_instance_information                 |Describe Instance Information                                                                                                                                                                      |                    |                        |
 
 
 ## License
 This library is licensed under the MIT-0 License. See the LICENSE file.
-
 
 ## Considerations
 - When the format_type is selected as "csv" ;boto_formatter will skip the columns which contains "," in value.

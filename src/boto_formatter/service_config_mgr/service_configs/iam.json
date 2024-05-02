@@ -7,8 +7,12 @@
             "boto_session_type": "client",
             "response_format": "FORMAT_2",
             "function_type": "list",
-            "is_regional": "No",
-            "pagination_support": "Yes",
+            "is_regional": "N",
+            "pagination_support": "Y",
+            "is_multi_account_support": "Y",
+            "implclass": "_global_paginate",
+            "implfunction": "process",
+            "validation_functions": "",
             "result_keys": [
                 "Users"
             ],
@@ -31,8 +35,12 @@
             "boto_session_type": "client",
             "response_format": "FORMAT_2",
             "function_type": "list",
-            "is_regional": "No",
-            "pagination_support": "Yes",
+            "is_regional": "N",
+            "pagination_support": "Y",
+            "is_multi_account_support": "Y",
+            "implclass": "_global_paginate",
+            "implfunction": "process",
+            "validation_functions": "",
             "result_keys": [
                 "AccessKeyMetadata"
             ],
@@ -49,8 +57,12 @@
             "boto_session_type": "client",
             "response_format": "FORMAT_3",
             "function_type": "list",
-            "is_regional": "No",
-            "pagination_support": "Yes",
+            "is_regional": "N",
+            "pagination_support": "Y",
+            "is_multi_account_support": "Y",
+            "implclass": "_global_paginate",
+            "implfunction": "process",
+            "validation_functions": "",
             "result_keys": [
                 "AccountAliases"
             ],
@@ -64,8 +76,21 @@
             "boto_session_type": "client",
             "response_format": "FORMAT_2",
             "function_type": "list",
-            "is_regional": "No",
-            "pagination_support": "Yes",
+            "is_regional": "N",
+            "pagination_support": "Y",
+            "is_multi_account_support": "Y",
+            "implclass": "_global_paginate",
+            "implfunction": "process",
+            "validation_functions": "",
+            "pagination_attributes": [
+                {
+                    "attribute_name": "GroupName",
+                    "attribute_value": "",
+                    "is_visible": "Y",
+                    "display_prompt": "Group Name",
+                    "type": "str"
+                }
+            ],
             "result_keys": [
                 "AttachedPolicies"
             ],
@@ -80,8 +105,21 @@
             "boto_session_type": "client",
             "response_format": "FORMAT_2",
             "function_type": "list",
-            "is_regional": "No",
-            "pagination_support": "Yes",
+            "is_regional": "N",
+            "pagination_support": "Y",
+            "is_multi_account_support": "Y",
+            "implclass": "_global_paginate",
+            "implfunction": "process",
+            "validation_functions": "",
+            "pagination_attributes": [
+                {
+                    "attribute_name": "RoleName",
+                    "attribute_value": "",
+                    "is_visible": "Y",
+                    "display_prompt": "Role Name",
+                    "type": "str"
+                }
+            ],
             "result_keys": [
                 "AttachedPolicies"
             ],
@@ -96,8 +134,21 @@
             "boto_session_type": "client",
             "response_format": "FORMAT_2",
             "function_type": "list",
-            "is_regional": "No",
-            "pagination_support": "Yes",
+            "is_regional": "N",
+            "pagination_support": "Y",
+            "is_multi_account_support": "Y",
+            "implclass": "_global_paginate",
+            "implfunction": "process",
+            "validation_functions": "",
+            "pagination_attributes": [
+                {
+                    "attribute_name": "UserName",
+                    "attribute_value": "",
+                    "is_visible": "Y",
+                    "display_prompt": "User Name",
+                    "type": "str"
+                }
+            ],
             "result_keys": [
                 "AttachedPolicies"
             ],
@@ -112,8 +163,21 @@
             "boto_session_type": "client",
             "response_format": "FORMAT_3",
             "function_type": "list",
-            "is_regional": "No",
-            "pagination_support": "Yes",
+            "is_regional": "N",
+            "pagination_support": "Y",
+            "is_multi_account_support": "Y",
+            "implclass": "_global_paginate",
+            "implfunction": "process",
+            "pagination_attributes": [
+                {
+                    "attribute_name": "GroupName",
+                    "attribute_value": "",
+                    "is_visible": "Y",
+                    "display_prompt": "Group Name",
+                    "type": "str"
+                }
+            ],
+            "validation_functions": "",
             "result_keys": [
                 "PolicyNames"
             ],
@@ -125,15 +189,23 @@
             "function_name": "list_groups",
             "function_description": "Lists all managed policies that are attached to the specified IAM role",
             "boto_session_type": "client",
-            "response_format": "FORMAT_3",
+            "response_format": "FORMAT_2",
             "function_type": "list",
-            "is_regional": "No",
-            "pagination_support": "Yes",
+            "is_regional": "N",
+            "pagination_support": "Y",
+            "is_multi_account_support": "Y",
+            "implclass": "_global_paginate",
+            "implfunction": "process",
+            "validation_functions": "",
             "result_keys": [
                 "Groups"
             ],
             "json_response": {
-                "Groups": " "
+                "Path": "",
+                "GroupName": "",
+                "GroupId": "",
+                "Arn": "",
+                "CreateDate": ""
             }
         },
         {
@@ -142,8 +214,12 @@
             "boto_session_type": "client",
             "response_format": "FORMAT_2",
             "function_type": "list",
-            "is_regional": "No",
-            "pagination_support": "Yes",
+            "is_regional": "N",
+            "pagination_support": "Y",
+            "is_multi_account_support": "Y",
+            "implclass": "_global_paginate",
+            "implfunction": "process",
+            "validation_functions": "",
             "result_keys": [
                 "Policies"
             ],
@@ -169,8 +245,12 @@
             "boto_session_type": "client",
             "response_format": "FORMAT_2",
             "function_type": "list",
-            "is_regional": "No",
-            "pagination_support": "Yes",
+            "is_regional": "N",
+            "pagination_support": "Y",
+            "is_multi_account_support": "Y",
+            "implclass": "_global_paginate",
+            "implfunction": "process",
+            "validation_functions": "",
             "result_keys": [
                 "Roles"
             ],

@@ -199,10 +199,19 @@
             "function_type": "list",
             "is_regional": "N",
             "pagination_support": "N",
-            "implclass": "Not Defined",
-            "implfunction": "Not Defined",
-            "validation_functions": "Not Defined",
-            "is_multi_account_support": "Not Defined",
+            "implclass": "_global_no_paginate",
+            "implfunction": "process",
+            "validation_functions": "",
+            "is_multi_account_support": "Y",
+            "pagination_attributes": [
+                {
+                    "attribute_name": "Bucket",
+                    "attribute_value": "",
+                    "is_visible": "Y",
+                    "display_prompt": "The name of the bucket",
+                    "type": "str"
+                }
+            ],
             "result_keys": [
                 "Uploads"
             ],

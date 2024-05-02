@@ -1,0 +1,7 @@
+.venv/
+dist/
+__pycache__/
+eggs/
+.eggs/py
+tests/output
+src/boto_formatter.egg-info

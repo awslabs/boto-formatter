@@ -20,7 +20,10 @@ def get_service_name(file_name):
     """
     json_file_name = None
     try:
-        json_file_name = file_name[0:len(file_name)-5]
+        file_len = len(file_name)
+        if file_name[file_len-5:file_len] ==".json":
+                json_file_name = file_name[0:len(file_name)-5]
+                  
     except Exception as err:
         logger.error(err)
         ERROR_MESSAGE = " Invalid file {} found in service_config directory. service_config shoudl contain only .json files".format(
@@ -33,6 +36,7 @@ def get_service_name(file_name):
 class ServiceConfig():
     """ This class hold the  values from service_configs"""
     __data = {}
+    __service_functions_data= []
 
     @classmethod
     def load_all_service_data(cls):
@@ -42,18 +46,19 @@ class ServiceConfig():
             dir_path_service = os.path.join(dir_path, "service_configs")
             for service_file in os.listdir(dir_path_service):
                 service_name = get_service_name(service_file)
-                logger.info("{}.json found ".format(service_name))
-                file_path = os.path.join(dir_path_service, service_file)
-                f = open(file_path)
-                temp_data = json.load(f)
-                service_name = temp_data["service_name"]
-                ServiceConfig.__data[service_name] = {}
-                ServiceConfig.__data[service_name]["service_name"] = service_name
-                for function_details in temp_data["functions"]:
-                    function_name = function_details["function_name"]
-                    ServiceConfig.__data[service_name][function_name] = ServiceConfig.__process_function_details(
-                        function_details)
-                f.close()
+                if service_name is not None:
+                    logger.info("{}.json found ".format(service_name))
+                    file_path = os.path.join(dir_path_service, service_file)
+                    f = open(file_path)
+                    temp_data = json.load(f)
+                    service_name = temp_data["service_name"]
+                    ServiceConfig.__data[service_name] = {}
+                    ServiceConfig.__data[service_name]["service_name"] = service_name
+                    for function_details in temp_data["functions"]:
+                        function_name = function_details["function_name"]
+                        ServiceConfig.__data[service_name][function_name] = ServiceConfig.__process_function_details(
+                            function_details)
+                    f.close()
         except KeyError as err:
             logger.error(
                 "Please check service_config.json file . File syntax is not correct.")
@@ -66,6 +71,55 @@ class ServiceConfig():
             logger.error(
                 " IO error while loading the file aws_account_config.json {}. ".format(err))
             raise err
+        
+
+    @classmethod
+    def get_service_functions_list(cls):
+        """ Get all services and their functions"""
+
+        if len(ServiceConfig.__service_functions_data) > 0:
+            return ServiceConfig.__service_functions_data
+        else:
+            try:
+                dir_path = os.path.dirname(os.path.abspath(__file__))
+                dir_path_service = os.path.join(dir_path, "service_configs")
+
+                for service_file in os.listdir(dir_path_service):
+                    service_name = get_service_name(service_file)
+                    if service_name is not None:
+                        logger.info("{}.json found ".format(service_name))
+                        file_path = os.path.join(dir_path_service, service_file)
+                        f = open(file_path)
+                        temp_data = json.load(f)
+                        service_name = temp_data["service_name"]
+                        service_dict = dict()  
+                        function_list =[]
+                    
+                        for function_details in temp_data["functions"]:
+                            function_dict =dict()
+                            function_dict["function_name"] = function_details["function_name"]
+                            function_dict["function_description"] = function_details["function_description"]
+                            if "pagination_attributes" in function_details.keys():
+                                function_dict["pagination_attributes"] = function_details["pagination_attributes"]
+                            function_list.append(function_dict)
+                        service_dict["service_name"] = service_name
+                        service_dict["function_list"] = function_list
+                        ServiceConfig.__service_functions_data.append(service_dict)
+                        f.close()
+                
+            except KeyError as err:
+                logger.error(
+                    "Please check service_config.json file . File syntax is not correct.")
+                raise err
+            except FileNotFoundError as err:
+                logger.error(
+                    "File service_config.json file is not Found. Please check aws_account_config.json file exists")
+                raise err
+            except IOError as err:
+                logger.error(
+                    " IO error while loading the file aws_account_config.json {}. ".format(err))
+                raise err
+            return ServiceConfig.__service_functions_data
 
     @classmethod
     def load_service_data(cls, service_name):
@@ -77,8 +131,10 @@ class ServiceConfig():
             for service_file in os.listdir(dir_path_service):
                 if service_name == get_service_name(service_file):
                     file_path = os.path.join(dir_path_service, service_file)
-                    f = open(file_path)
-                    temp_data = json.load(f)
+                    temp_data = None
+                    with open(file_path, "r+") as f:
+                        temp_data = json.load(f)
+                        f.close()
                     service_name = temp_data["service_name"]
                     ServiceConfig.__data[service_name] = {}
                     ServiceConfig.__data[service_name]["service_name"] = service_name
@@ -86,7 +142,7 @@ class ServiceConfig():
                         function_name = function_details["function_name"]
                         ServiceConfig.__data[service_name][function_name] = ServiceConfig.__process_function_details(
                             function_details)
-                    f.close()
+
         except KeyError as err:
             logger.error(
                 "Please check service_config.json file . File syntax is not correct.")

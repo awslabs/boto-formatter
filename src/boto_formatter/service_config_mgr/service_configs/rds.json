@@ -7,8 +7,12 @@
             "boto_session_type": "client",
             "response_format": "FORMAT_2",
             "function_type": "list",
-            "is_regional": "Yes",
-            "pagination_support": "Yes",
+            "is_regional": "Y",
+            "pagination_support": "Y",
+            "is_multi_account_support": "Y",
+            "implclass": "_regional_paginate",
+            "implfunction": "process",
+            "validation_functions": "",
             "result_keys": [
                 "DBClusters"
             ],
@@ -119,8 +123,12 @@
             "boto_session_type": "client",
             "response_format": "FORMAT_2",
             "function_type": "list",
-            "is_regional": "Yes",
-            "pagination_support": "Yes",
+            "is_regional": "Y",
+            "pagination_support": "Y",
+            "is_multi_account_support": "Y",
+            "implclass": "_regional_paginate",
+            "implfunction": "process",
+            "validation_functions": "",
             "result_keys": [
                 "DBInstances"
             ],
@@ -263,8 +271,12 @@
             "boto_session_type": "client",
             "response_format": "FORMAT_2",
             "function_type": "list",
-            "is_regional": "Yes",
-            "pagination_support": "Yes",
+            "is_regional": "Y",
+            "pagination_support": "Y",
+            "is_multi_account_support": "Y",
+            "implclass": "_regional_paginate",
+            "implfunction": "process",
+            "validation_functions": "",
             "result_keys": [
                 "DBSecurityGroups"
             ],
@@ -288,8 +300,12 @@
             "boto_session_type": "client",
             "response_format": "FORMAT_2",
             "function_type": "list",
-            "is_regional": "Yes",
-            "pagination_support": "Yes",
+            "is_regional": "Y",
+            "pagination_support": "Y",
+            "is_multi_account_support": "Y",
+            "implclass": "_regional_paginate",
+            "implfunction": "process",
+            "validation_functions": "",
             "result_keys": [
                 "DBSnapshots"
             ],
@@ -337,8 +353,12 @@
             "boto_session_type": "client",
             "response_format": "FORMAT_2",
             "function_type": "list",
-            "is_regional": "Yes",
-            "pagination_support": "Yes",
+            "is_regional": "Y",
+            "pagination_support": "Y",
+            "is_multi_account_support": "Y",
+            "implclass": "_regional_paginate",
+            "implfunction": "process",
+            "validation_functions": "",
             "result_keys": [
                 "GlobalClusters"
             ],

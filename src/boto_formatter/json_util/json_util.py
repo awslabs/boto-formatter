@@ -194,9 +194,11 @@ def get_csv_data(result_json_list):
         logger.debug(result_json_list)
         csv_data.append(",".join(result_json_list[0].keys()))
         for json_obj in result_json_list:
-            csv_data.append(",".join(json_obj.values()))
+            csv_data.append(",".join(replace_breaking_comma(json_obj.values())))
     return csv_data
 
+def replace_breaking_comma(json_obj_values):
+    return [obj_value.replace(',', '/n') for obj_value in json_obj_values]
 
 def print_csv_response(csv_data):
     """

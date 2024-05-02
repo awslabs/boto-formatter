@@ -7,8 +7,21 @@
             "boto_session_type": "client",
             "response_format": "FORMAT_2",
             "function_type": "list",
-            "is_regional": "No",
-            "pagination_support": "Yes",
+            "is_regional": "N",
+            "pagination_support": "Y",
+            "is_multi_account_support": "Y",
+            "implclass": "_global_paginate",
+            "implfunction": "process",
+            "validation_functions": "",
+            "pagination_attributes": [
+                {
+                    "attribute_name": "CollectionId",
+                    "attribute_value": "",
+                    "is_visible": "Y",
+                    "display_prompt": "CollectionId The UUID of the CIDR collection.",
+                    "type": "str"
+                }
+            ],
             "result_keys": [
                 "CidrCollections"
             ],
@@ -25,8 +38,12 @@
             "boto_session_type": "client",
             "response_format": "FORMAT_2",
             "function_type": "list",
-            "is_regional": "No",
-            "pagination_support": "Yes",
+            "is_regional": "N",
+            "pagination_support": "Y",
+            "is_multi_account_support": "Y",
+            "implclass": "_global_no_paginate",
+            "implfunction": "process",
+            "validation_functions": "",
             "result_keys": [
                 "HostedZones"
             ],
@@ -47,8 +64,28 @@
             "boto_session_type": "client",
             "response_format": "FORMAT_2",
             "function_type": "list",
-            "is_regional": "No",
-            "pagination_support": "Yes",
+            "is_regional": "N",
+            "pagination_support": "Y",
+            "is_multi_account_support": "N",
+            "implclass": "_global_no_paginate",
+            "implfunction": "process",
+            "validation_functions": "",
+            "pagination_attributes": [
+                {
+                    "attribute_name": "VPCId",
+                    "attribute_value": "",
+                    "is_visible": "Y",
+                    "display_prompt": "The ID of the Amazon VPC that you want to list hosted zones",
+                    "type": "str"
+                },
+                {
+                    "attribute_name": "VPCRegion",
+                    "attribute_value": "",
+                    "is_visible": "Y",
+                    "display_prompt": "The Amazon Web Services Region that you created the VPC in.",
+                    "type": "str"
+                }
+            ],
             "result_keys": [
                 "HostedZoneSummaries"
             ],
@@ -65,8 +102,21 @@
             "boto_session_type": "client",
             "response_format": "FORMAT_2",
             "function_type": "list",
-            "is_regional": "No",
-            "pagination_support": "Yes",
+            "is_regional": "N",
+            "pagination_support": "Y",
+            "is_multi_account_support": "Y",
+            "implclass": "_global_paginate",
+            "implfunction": "process",
+            "validation_functions": "",
+            "pagination_attributes": [
+                {
+                    "attribute_name": "HostedZoneId",
+                    "attribute_value": "",
+                    "is_visible": "Y",
+                    "display_prompt": "Hosted Zone Id",
+                    "type": "str"
+                }
+            ],
             "result_keys": [
                 "VPCs"
             ],
