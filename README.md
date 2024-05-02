@@ -11,7 +11,7 @@ The boto_magic_formatter is a tool that handles several common tasks when workin
 In summary, the boto_magic_formatter takes care of pagination, flattening, 
 consistent output formatting, and output destination for AWS data, returning it as a csv or json file.
 
-[For List of supported services and functions Click Here](#Supported-services-functions)
+For list of supported services and functions [Click Here](#Supported-services-functions)
 # How it works?
 You simply add **@boto_magic_formatter** decorator to your placeholder python function and decorator will do all the magic . 
 
