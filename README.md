@@ -1,7 +1,7 @@
 # boto_formatter
 # What is boto _formatter?
 
-The boto_magic_formatter is a tool that handles several common tasks when working with boto3 response data:
+The boto_magic_formatter is a tool that handles several common tasks when working with boto3 and listing of AWS resources:
 1. It automatically handles pagination of AWS responses, 
    stitching together data from multiple pages into a single output.
 2. It flattens out nested JSON structures into a consistent tabular format. 
@@ -11,7 +11,7 @@ The boto_magic_formatter is a tool that handles several common tasks when workin
 In summary, the boto_magic_formatter takes care of pagination, flattening, 
 consistent output formatting, and output destination for AWS data, returning it as a csv or json file.
 
-[List of supported services and functions](#Supported-services-functions)
+[For List of supported services and functions Click Here](#Supported-services-functions)
 # How it works?
 You simply add **@boto_magic_formatter** decorator to your placeholder python function and decorator will do all the magic . 
 
@@ -141,7 +141,8 @@ if __name__ == "__main__":
 
 # FAQ
 
-## How can I find out which service names and functions ,attributes are available in the boto_magic_formatter library?
+## What are the available service names, functions, and attributes that I can access in the boto_magic_formatter library and how can I get information about them?
+
 **Option 1** : [List of supported services and functions](#Supported-services-functions)
 
 **Option2** :Generate a .csv file listing all the supported service names and function names that boto_magic_formatter supports, you can use the 
@@ -156,8 +157,8 @@ if __name__ == "__main__":
 
 
 
-## Passing **attributes
-**When calling functions for use cases like listing S3 bucket objects or EMR cluster instance fleets, identifying attributes need to be passed in. For example, to retrieve a list of objects in an S3 bucket, you would pass the specific bucket name. And to get instance fleets for an EMR cluster, you would pass the cluster ID. You can pass identifying attributes to the function**
+## Passing the information to function as  **attributes
+**When calling functions for use cases like listing S3 bucket objects or EMR cluster instance fleets, identifying attributes need to be passed in. For example, to retrieve a list of objects in an S3 bucket, you would pass the specific bucket name. And to get instance fleets for an EMR cluster, you would pass the cluster ID. You can pass this information to the function as attributes**
 
 **Code snippet Below -->**
 ```
@@ -181,7 +182,7 @@ if __name__ == "__main__":
 
 
 
-## Usage of attributes output chaining and prefix_columns .
+## Usage of attributes output chaining (passing one function output to another function as input) and prefix_columns .
 **For example usecase of identify all S3 buckets with inventory settings enabled, you first need to retrieve a list of all S3 buckets. Then, for each bucket, check if inventory configuration is enabled. You also need to store the source bucket name with the inventory configuration result for reference. Function chaining can be utilized to perform these actions sequentially, while prefix_columns allows appending supplemental columns to the output that indicate the source bucket for each record returned.**
 
 **Code snippet Below -->**
