@@ -6,7 +6,7 @@ The boto_magic_formatter is a tool that handles several common tasks when workin
    stitching together data from multiple pages into a single output.
 2. It flattens out nested JSON structures into a consistent tabular format. 
 3. It allows you to output the processed data to a file, print it to standard out,
-   send it to another command, or upload it to S3 (TBD).
+   send it to another command, or upload it to S3.
 4. It can convert the data to either csv or json format.
 In summary, the boto_magic_formatter takes care of pagination, flattening, 
 consistent output formatting, and output destination for AWS data, returning it as a csv or json file.
