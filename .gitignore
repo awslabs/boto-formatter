@@ -5,3 +5,4 @@ eggs/
 .eggs/py
 tests/output
 src/boto_formatter.egg-info
+.gitignore
