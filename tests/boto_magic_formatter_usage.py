@@ -46,7 +46,7 @@ def list_resources(_session, service_name, function_name, **kwargs):
 """
 Save .csv file on S3 bucket
 """
-@boto_magic_formatter(format_type="json", output_to="s3", s3_bucket="rajeabh-cdk-test")
+@boto_magic_formatter(format_type="json", output_to="s3", s3_bucket="abcbucket")
 def list_resources_to_s3(_session, service_name, function_name, **kwargs):
     """
     Place holder function. Decorator does all the magic and update the result.
